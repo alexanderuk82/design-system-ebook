@@ -1,0 +1,25 @@
+{
+  "name": "design-system-ebook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Companion code repo for the Design System V.1.0 ebook by Alexander Burgo.",
+  "author": "Alexander Burgo <alexanderburgosuk82@gmail.com> (https://alexanderburgos.netlify.app/)",
+  "license": "MIT",
+  "homepage": "https://github.com/alexanderuk82/design-system-ebook",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexanderuk82/design-system-ebook.git"
+  },
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "react",
+    "typescript",
+    "companion",
+    "ebook"
+  ],
+  "scripts": {
+    "setup-stubs": "python scripts/setup-stubs.py"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
