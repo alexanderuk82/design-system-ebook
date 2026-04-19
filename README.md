@@ -1,7 +1,7 @@
 # Design System V.1.0 · Companion repo
 
-> Complete runnable code examples for the **Design System V.1.0** ebook by Alexander Burgo.
-> Código ejecutable completo para el libro **Design System V.1.0** de Alexander Burgo.
+> Complete runnable code examples for the **Design System V.1.0** ebook by Alexander Burgos.
+> Código ejecutable completo para el libro **Design System V.1.0** de Alexander Burgos.
 
 Bilingual repo (English + Español) mirroring the 15 chapters of the book that include code. Every `example_NN_NN` tag in the book resolves to a folder here.
 
@@ -119,7 +119,7 @@ MIT. Ver [LICENSE](./LICENSE).
 
 ## Author
 
-**Alexander Burgo** · Senior UX Engineer · Author of Design System V.1.0.
+**Alexander Burgos** · Senior UX Engineer · Author of Design System V.1.0.
 
 - Website: [alexanderburgos.netlify.app](https://alexanderburgos.netlify.app/)
 - LinkedIn: [alexandersstudio](https://linkedin.com/in/alexandersstudio/)
