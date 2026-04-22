@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example 04_01 - Three tiers in action</title>
+  <link rel="stylesheet" href="./dist/variables.css">
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.55;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p { color: #4a4a4a; }
+    code { background: #f4f4f5; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .chain {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: ui-monospace, "SF Mono", Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin: 1.25rem 0;
+      color: #2a2a2a;
+    }
+    .button-primary {
+      background: var(--button-background-primary);
+      color: white;
+      border: 0;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .button-primary:hover { filter: brightness(1.08); }
+  </style>
+</head>
+<body>
+  <h1>Three tiers in action</h1>
+  <p>
+    The button consumes <code>--button-background-primary</code>, a
+    component token. That one points at the intent
+    <code>--color-intent-action-primary</code>, which in turn points at
+    the primitive <code>--color-blue-500</code>. Three layers, one source
+    of truth.
+  </p>
+  <div class="chain">
+    button.background.primary  →  color.intent.action-primary  →  color.blue.500  =  #1F6FEB
+  </div>
+  <button type="button" class="button-primary">Save changes</button>
+</body>
+</html>

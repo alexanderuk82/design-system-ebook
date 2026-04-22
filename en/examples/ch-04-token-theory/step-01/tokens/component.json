@@ -1,0 +1,11 @@
+{
+  "button": {
+    "background": {
+      "primary": {
+        "$value": "{color.intent.action-primary}",
+        "$type": "color",
+        "$description": "Background of primary Button. Component binding to the intent layer."
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "example-04-02",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 4: resolution vs reference. Same JSON, two CSS output modes.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

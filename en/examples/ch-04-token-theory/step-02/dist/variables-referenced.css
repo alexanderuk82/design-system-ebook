@@ -1,0 +1,8 @@
+/* REFERENCED mode. The chain is preserved with var(). Change
+   --color-blue-500 at runtime and everything downstream updates
+   on its own. Cost: one indirection per lookup. */
+:root {
+  --button-background-primary: var(--color-intent-action-primary);
+  --color-blue-500: #1F6FEB;
+  --color-intent-action-primary: var(--color-blue-500);
+}

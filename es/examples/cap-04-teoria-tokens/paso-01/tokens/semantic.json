@@ -1,0 +1,11 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "$value": "{color.blue.500}",
+        "$type": "color",
+        "$description": "Semantic. Le da rol al primitivo: este es el color primario de la marca."
+      }
+    }
+  }
+}

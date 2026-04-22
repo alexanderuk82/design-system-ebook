@@ -1,0 +1,11 @@
+{
+  "color": {
+    "blue": {
+      "500": {
+        "$value": "#1F6FEB",
+        "$type": "color",
+        "$description": "Primitive. Just a step on a scale, no role attached."
+      }
+    }
+  }
+}

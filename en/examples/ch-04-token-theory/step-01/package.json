@@ -1,0 +1,10 @@
+{
+  "name": "example-04-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 4: three tiers of tokens (primitive, intent, component) chained.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

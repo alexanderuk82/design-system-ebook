@@ -1,0 +1,8 @@
+/* RESOLVED mode. The chain is flattened at build time. Every
+   variable carries its literal value. Cheaper at runtime, less
+   flexible for dynamic overrides. */
+:root {
+  --button-background-primary: #1F6FEB;
+  --color-blue-500: #1F6FEB;
+  --color-intent-action-primary: #1F6FEB;
+}

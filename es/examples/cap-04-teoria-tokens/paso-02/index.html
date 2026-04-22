@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 04_02 - Resolucion vs referencia</title>
+  <link id="tokens-css" rel="stylesheet" href="./dist/variables-referenced.css">
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.55;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p { color: #4a4a4a; }
+    code { background: #f4f4f5; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .row {
+      display: flex; gap: 0.5rem; align-items: center; margin: 1.25rem 0;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 56px; height: 56px; border-radius: 8px;
+      background: var(--color-brand-primary);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.06) inset;
+    }
+    .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+    button {
+      font: inherit; padding: 0.5rem 0.9rem; border-radius: 6px;
+      border: 1px solid #d4d4d8; background: white; cursor: pointer;
+    }
+    button.active { background: #1a1a1a; color: white; border-color: #1a1a1a; }
+    .demo { background: #f9fafb; padding: 1rem; border-radius: 8px; margin-top: 0.5rem; }
+    label { display: flex; align-items: center; gap: 0.5rem; }
+    input[type="color"] { width: 40px; height: 32px; border: 0; background: transparent; padding: 0; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Resolucion vs referencia</h1>
+  <p>
+    El mismo set de tokens compilado de dos maneras. En resuelto, cada
+    variable lleva su valor literal. En referenciado, la cadena se
+    preserva con <code>var()</code>. Las dos versiones funcionan, pero
+    se comportan distinto cuando intentas cambiar el primitivo en
+    runtime.
+  </p>
+
+  <div class="controls">
+    <button id="btn-ref" class="active" type="button">Cargar referenciado</button>
+    <button id="btn-res" type="button">Cargar resuelto</button>
+    <label>Cambiar primitivo: <input id="picker" type="color" value="#0052CC"></label>
+  </div>
+
+  <div class="demo">
+    <div class="row">
+      <div class="swatch"></div>
+      <span><code>var(--color-brand-primary)</code> usa el primitivo via la cadena</span>
+    </div>
+    <p style="font-size:0.9em; color:#5a5a5a; margin: 0;">
+      Mueve el color picker. En modo referenciado el cuadro cambia, porque
+      el semantic apunta a <code>var(--color-blue-500)</code>. En modo resuelto
+      se queda igual, porque el semantic ya tiene el hex literal compilado dentro.
+    </p>
+  </div>
+
+  <script>
+    const link = document.getElementById("tokens-css");
+    const btnRef = document.getElementById("btn-ref");
+    const btnRes = document.getElementById("btn-res");
+    const picker = document.getElementById("picker");
+
+    btnRef.addEventListener("click", () => {
+      link.href = "./dist/variables-referenced.css";
+      btnRef.classList.add("active");
+      btnRes.classList.remove("active");
+    });
+    btnRes.addEventListener("click", () => {
+      link.href = "./dist/variables-resolved.css";
+      btnRes.classList.add("active");
+      btnRef.classList.remove("active");
+    });
+    picker.addEventListener("input", (e) => {
+      document.documentElement.style.setProperty("--color-blue-500", e.target.value);
+    });
+  </script>
+</body>
+</html>

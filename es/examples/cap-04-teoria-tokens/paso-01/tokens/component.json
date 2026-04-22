@@ -1,0 +1,11 @@
+{
+  "button": {
+    "primary": {
+      "background": {
+        "$value": "{color.brand.primary}",
+        "$type": "color",
+        "$description": "Component. Binding del Button al semantic. Si manana el Button necesita su propio matiz, se cambia aqui sin tocar el resto."
+      }
+    }
+  }
+}

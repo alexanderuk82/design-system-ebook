@@ -1,0 +1,7 @@
+/* Modo REFERENCIADO. La cadena se preserva con var().
+   Cambias --color-blue-500 en runtime y todo lo que cuelga
+   se actualiza solo. Coste: una indireccion por lookup. */
+:root {
+  --color-blue-500: #0052CC;
+  --color-brand-primary: var(--color-blue-500);
+}

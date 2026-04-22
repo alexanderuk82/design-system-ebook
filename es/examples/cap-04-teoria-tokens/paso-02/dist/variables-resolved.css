@@ -1,0 +1,7 @@
+/* Modo RESUELTO. La cadena se aplana al build. Cada variable
+   tiene su valor literal. Mas rendimiento en runtime, menos
+   flexibilidad para overrides dinamicos. */
+:root {
+  --color-blue-500: #0052CC;
+  --color-brand-primary: #0052CC;
+}

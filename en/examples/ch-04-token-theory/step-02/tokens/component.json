@@ -1,0 +1,10 @@
+{
+  "button": {
+    "background": {
+      "primary": {
+        "$value": "{color.intent.action-primary}",
+        "$type": "color"
+      }
+    }
+  }
+}
