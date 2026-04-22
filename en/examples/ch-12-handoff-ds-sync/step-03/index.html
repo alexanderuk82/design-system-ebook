@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example 12_03 - DS Sync CSS output</title>
+  <link rel="stylesheet" href="./dist/tokens.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 720px; margin: 0 auto;
+      padding: 2.5rem 1.5rem; line-height: 1.55;
+      background: var(--color-semantic-surface-base);
+      color: var(--color-semantic-text-primary);
+      transition: background 0.18s, color 0.18s;
+    }
+    h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+    p { color: var(--color-semantic-text-secondary); }
+    code { font-size: 0.85em; padding: 0.15rem 0.4rem; border-radius: 4px; background: var(--color-semantic-surface-elevated); color: var(--color-semantic-text-primary); }
+    .controls { margin: 1.25rem 0; display: flex; gap: 0.5rem; }
+    button {
+      font: inherit; padding: 0.5rem 0.9rem; border-radius: 6px;
+      border: 1px solid var(--color-primitive-gray-200);
+      background: var(--color-semantic-surface-elevated);
+      color: var(--color-semantic-text-primary);
+      cursor: pointer;
+    }
+    button.active {
+      background: var(--color-semantic-brand-primary);
+      color: white; border-color: var(--color-semantic-brand-primary);
+    }
+    .card {
+      background: var(--color-semantic-surface-elevated);
+      padding: var(--spacing-semantic-component-padding);
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .card-title { margin: 0 0 0.25rem; color: var(--color-semantic-text-primary); }
+    .card-body { color: var(--color-semantic-text-secondary); margin: 0; }
+  </style>
+</head>
+<body>
+  <h1>DS Sync CSS output</h1>
+  <p>
+    The file <code>dist/tokens.css</code> is what a dev gets in their PR
+    when the plugin opens the update PR. Three blocks: light in
+    <code>:root</code>, dark in <code>@media</code>, manual dark via
+    <code>[data-theme="dark"]</code>.
+  </p>
+
+  <div class="controls">
+    <button id="btn-os" class="active">OS mode (auto)</button>
+    <button id="btn-light">Force light</button>
+    <button id="btn-dark">Force dark</button>
+  </div>
+
+  <div class="card">
+    <h2 class="card-title">Card consuming semantic</h2>
+    <p class="card-body">
+      This card uses <code>--color-semantic-surface-elevated</code>,
+      <code>--color-semantic-text-primary</code> and
+      <code>--spacing-semantic-component-padding</code>. Zero mode logic
+      in the component. Switch modes above and watch it reconfigure
+      without reload.
+    </p>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const btnOs = document.getElementById("btn-os");
+    const btnLight = document.getElementById("btn-light");
+    const btnDark = document.getElementById("btn-dark");
+    const setActive = (which) => {
+      [btnOs, btnLight, btnDark].forEach(b => b.classList.remove("active"));
+      which.classList.add("active");
+    };
+    btnOs.addEventListener("click", () => { root.removeAttribute("data-theme"); setActive(btnOs); });
+    btnLight.addEventListener("click", () => { root.setAttribute("data-theme", "light"); setActive(btnLight); });
+    btnDark.addEventListener("click", () => { root.setAttribute("data-theme", "dark"); setActive(btnDark); });
+  </script>
+</body>
+</html>

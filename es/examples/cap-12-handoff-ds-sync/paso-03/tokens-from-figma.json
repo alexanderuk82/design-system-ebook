@@ -1,0 +1,45 @@
+{
+  "$description": "Export simulado de DS Sync desde Figma. Estructura W3C Design Tokens con modes (light/dark) en la capa semantic.",
+  "color": {
+    "primitive": {
+      "blue": {
+        "500": { "$value": "#0052CC", "$type": "color" },
+        "700": { "$value": "#003D99", "$type": "color" }
+      },
+      "gray": {
+        "50":  { "$value": "#FAFAFA", "$type": "color" },
+        "100": { "$value": "#F4F4F5", "$type": "color" },
+        "200": { "$value": "#E4E4E7", "$type": "color" },
+        "700": { "$value": "#3F3F46", "$type": "color" },
+        "800": { "$value": "#27272A", "$type": "color" },
+        "900": { "$value": "#18181B", "$type": "color" }
+      }
+    },
+    "semantic": {
+      "surface": {
+        "base":     { "$value": { "light": "{color.primitive.gray.50}",  "dark": "{color.primitive.gray.900}" }, "$type": "color" },
+        "elevated": { "$value": { "light": "{color.primitive.gray.100}", "dark": "{color.primitive.gray.800}" }, "$type": "color" }
+      },
+      "text": {
+        "primary":   { "$value": { "light": "{color.primitive.gray.900}", "dark": "{color.primitive.gray.100}" }, "$type": "color" },
+        "secondary": { "$value": { "light": "{color.primitive.gray.700}", "dark": "{color.primitive.gray.200}" }, "$type": "color" }
+      },
+      "brand": {
+        "primary": { "$value": { "light": "{color.primitive.blue.500}", "dark": "{color.primitive.blue.700}" }, "$type": "color" }
+      }
+    }
+  },
+  "spacing": {
+    "primitive": {
+      "1": { "$value": "4px",  "$type": "dimension" },
+      "2": { "$value": "8px",  "$type": "dimension" },
+      "3": { "$value": "12px", "$type": "dimension" },
+      "4": { "$value": "16px", "$type": "dimension" }
+    },
+    "semantic": {
+      "component": {
+        "padding": { "$value": "{spacing.primitive.3}", "$type": "dimension" }
+      }
+    }
+  }
+}

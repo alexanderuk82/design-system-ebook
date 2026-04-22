@@ -1,0 +1,10 @@
+{
+  "name": "ejemplo-12-03",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Capitulo 12: output CSS variables generado por DS Sync con modes light/dark.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}
