@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 09_05 - Card compositivo</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Card compositivo</h1>
+    <p>
+      No es un componente con quince props. Es un Root al que adjuntas las
+      piezas que necesitas en el orden que necesitas. Composicion vence a
+      configuracion.
+    </p>
+
+    <div id="root"></div>
+  </main>
+
+  <script type="text/babel" data-presets="typescript,react">
+    type DivProps = React.HTMLAttributes<HTMLDivElement>;
+    type ImgProps = React.ImgHTMLAttributes<HTMLImageElement>;
+
+    function CardRoot({ className = "", ...rest }: DivProps) {
+      return <div className={`card ${className}`} {...rest} />;
+    }
+    function CardImage(props: ImgProps) {
+      return <img className="card-image" {...props} />;
+    }
+    function CardHeader(props: DivProps) {
+      return <div className="card-header" {...props} />;
+    }
+    function CardTitle({ children, ...rest }: React.HTMLAttributes<HTMLHeadingElement>) {
+      return <h3 className="card-title" {...rest}>{children}</h3>;
+    }
+    function CardSubtitle({ children, ...rest }: React.HTMLAttributes<HTMLParagraphElement>) {
+      return <p className="card-subtitle" {...rest}>{children}</p>;
+    }
+    function CardBody(props: DivProps) {
+      return <div className="card-body" {...props} />;
+    }
+    function CardFooter(props: DivProps) {
+      return <div className="card-footer" {...props} />;
+    }
+
+    // Object.assign expone los subcomponentes como propiedades del Root.
+    // Asi el consumidor escribe <Card.Image>, <Card.Header>, etc.
+    const Card = Object.assign(CardRoot, {
+      Image: CardImage,
+      Header: CardHeader,
+      Title: CardTitle,
+      Subtitle: CardSubtitle,
+      Body: CardBody,
+      Footer: CardFooter,
+    });
+
+    function Button({ children, ...rest }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+      return <button className="btn" {...rest}>{children}</button>;
+    }
+
+    function App() {
+      return (
+        <div className="grid">
+          <Card>
+            <Card.Image src="https://picsum.photos/seed/ds1/600/300" alt="" />
+            <Card.Header>
+              <Card.Title>Diseno de APIs</Card.Title>
+              <Card.Subtitle>Capitulo 8</Card.Subtitle>
+            </Card.Header>
+            <Card.Body>Aprende a evitar Buttons con 17 props.</Card.Body>
+            <Card.Footer>
+              <Button>Leer</Button>
+            </Card.Footer>
+          </Card>
+
+          <Card>
+            <Card.Header>
+              <Card.Title>Sin imagen, sin subtitulo</Card.Title>
+            </Card.Header>
+            <Card.Body>
+              Este Card omite Image y Subtitle. El layout se ajusta solo
+              porque cada subcomponente es opcional.
+            </Card.Body>
+          </Card>
+
+          <Card>
+            <Card.Image src="https://picsum.photos/seed/ds2/600/300" alt="" />
+            <Card.Body>
+              Este Card pone la Body justo despues de la Image, sin Header.
+              El consumidor decide el orden, el componente lo absorbe.
+            </Card.Body>
+            <Card.Footer>
+              <Button>Ver mas</Button>
+            </Card.Footer>
+          </Card>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>

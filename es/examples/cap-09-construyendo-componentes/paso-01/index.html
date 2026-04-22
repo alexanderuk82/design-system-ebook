@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 09_01 - Button accesible</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Button</h1>
+    <p>
+      Cuatro variantes, tres tamanos, cinco estados. El codigo completo del
+      componente vive dentro del script Babel de esta pagina, compilado en
+      el navegador. Abajo, ejemplos en cada combinacion.
+    </p>
+
+    <div id="root"></div>
+  </main>
+
+  <script type="text/babel" data-presets="typescript,react">
+    const { useState } = React;
+
+    type Variant = "primary" | "secondary" | "ghost" | "danger";
+    type Size = "sm" | "md" | "lg";
+
+    interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+      variant?: Variant;
+      size?: Size;
+      loading?: boolean;
+      leftIcon?: React.ReactNode;
+      rightIcon?: React.ReactNode;
+    }
+
+    function Button({
+      variant = "primary",
+      size = "md",
+      loading = false,
+      disabled = false,
+      leftIcon,
+      rightIcon,
+      children,
+      ...rest
+    }: ButtonProps) {
+      const isDisabled = loading || disabled;
+      return (
+        <button
+          type="button"
+          data-variant={variant}
+          data-size={size}
+          aria-busy={loading || undefined}
+          aria-disabled={disabled || undefined}
+          disabled={isDisabled}
+          {...rest}
+        >
+          {loading && <span className="spinner" aria-hidden="true" />}
+          {!loading && leftIcon && <span className="icon" aria-hidden="true">{leftIcon}</span>}
+          <span className="label">{children}</span>
+          {!loading && rightIcon && <span className="icon" aria-hidden="true">{rightIcon}</span>}
+        </button>
+      );
+    }
+
+    // Demo
+    function App() {
+      const [isSaving, setIsSaving] = useState(false);
+
+      const handleSave = () => {
+        setIsSaving(true);
+        setTimeout(() => setIsSaving(false), 1600);
+      };
+
+      return (
+        <div>
+          <section>
+            <h2>Variantes</h2>
+            <div className="row">
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="danger">Danger</Button>
+            </div>
+          </section>
+
+          <section>
+            <h2>Tamanos</h2>
+            <div className="row">
+              <Button size="sm">Small</Button>
+              <Button size="md">Medium</Button>
+              <Button size="lg">Large</Button>
+            </div>
+          </section>
+
+          <section>
+            <h2>Estados</h2>
+            <div className="row">
+              <Button>Default</Button>
+              <Button disabled>Disabled</Button>
+              <Button onClick={handleSave} loading={isSaving}>
+                {isSaving ? "Guardando" : "Guardar cambios"}
+              </Button>
+            </div>
+            <p className="hint">
+              Click el tercer boton: bloquea la accion durante 1.6s con
+              <code>aria-busy</code> y un spinner. Un usuario con screen
+              reader lo escucha anunciado, no solo lo ve.
+            </p>
+          </section>
+
+          <section>
+            <h2>Slots de iconos</h2>
+            <div className="row">
+              <Button leftIcon={<span>&larr;</span>}>Volver</Button>
+              <Button rightIcon={<span>&rarr;</span>}>Continuar</Button>
+              <Button variant="danger" leftIcon={<span>&times;</span>}>Eliminar</Button>
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>

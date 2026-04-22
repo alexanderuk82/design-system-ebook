@@ -1,0 +1,117 @@
+/* Tokens minimos necesarios. En un DS real vienen del paso-01 / 02 / etc. */
+:root {
+  --color-brand: #0052CC;
+  --color-brand-strong: #003D99;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6a6a6a;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f4f5;
+  --color-border: #d4d4d8;
+  --color-danger: #DC2626;
+  --color-danger-strong: #B91C1C;
+  --color-focus: #1F6FEB;
+
+  --radius: 8px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: #fafafa;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+h2 { font-size: 1rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin: 2rem 0 0.75rem; }
+p  { color: var(--color-text-muted); }
+.hint { font-size: 0.9rem; margin-top: 0.5rem; }
+code { background: var(--color-surface-muted); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Button shared */
+button[data-variant] {
+  font-family: inherit;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+button[data-variant]:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+button[data-variant][aria-busy="true"],
+button[data-variant]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Sizes */
+button[data-size="sm"] { font-size: 0.85rem; padding: 0.35rem 0.7rem; }
+button[data-size="md"] { font-size: 1rem;    padding: 0.55rem 1.05rem; }
+button[data-size="lg"] { font-size: 1.1rem;  padding: 0.75rem 1.35rem; }
+
+/* Variants */
+button[data-variant="primary"] {
+  background: var(--color-brand);
+  color: white;
+}
+button[data-variant="primary"]:hover:not(:disabled):not([aria-busy="true"]) {
+  background: var(--color-brand-strong);
+}
+
+button[data-variant="secondary"] {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+button[data-variant="secondary"]:hover:not(:disabled):not([aria-busy="true"]) {
+  background: var(--color-surface-muted);
+}
+
+button[data-variant="ghost"] {
+  background: transparent;
+  color: var(--color-text);
+}
+button[data-variant="ghost"]:hover:not(:disabled):not([aria-busy="true"]) {
+  background: var(--color-surface-muted);
+}
+
+button[data-variant="danger"] {
+  background: var(--color-danger);
+  color: white;
+}
+button[data-variant="danger"]:hover:not(:disabled):not([aria-busy="true"]) {
+  background: var(--color-danger-strong);
+}
+
+/* Spinner */
+.spinner {
+  width: 0.9em;
+  height: 0.9em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.icon { display: inline-flex; align-items: center; }

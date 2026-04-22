@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 09_03 - Input accesible</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Input</h1>
+    <p>
+      Label obligatorio en TypeScript, helper y error conectados via
+      <code>aria-describedby</code>, error con <code>role="alert"</code>.
+      La accesibilidad la lleva el componente, no el equipo de producto.
+    </p>
+
+    <div id="root"></div>
+  </main>
+
+  <script type="text/babel" data-presets="typescript,react">
+    const { useId, useState, forwardRef } = React;
+
+    interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "id"> {
+      label: string;                  // required en TS, no opcional
+      helper?: string;
+      error?: string;
+      id?: string;
+      visuallyHiddenLabel?: boolean;  // para barras de busqueda compactas
+    }
+
+    const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+      { label, helper, error, id, visuallyHiddenLabel, ...rest },
+      ref
+    ) {
+      const generatedId = useId();
+      const inputId = id ?? generatedId;
+      const helperId = `${inputId}-helper`;
+      const errorId = `${inputId}-error`;
+
+      const describedBy = error ? errorId : helper ? helperId : undefined;
+
+      return (
+        <div className="field" data-error={Boolean(error) || undefined}>
+          <label
+            htmlFor={inputId}
+            className={visuallyHiddenLabel ? "label visually-hidden" : "label"}
+          >
+            {label}
+          </label>
+          <input
+            ref={ref}
+            id={inputId}
+            aria-invalid={Boolean(error) || undefined}
+            aria-describedby={describedBy}
+            {...rest}
+          />
+          {helper && !error && (
+            <span id={helperId} className="helper">{helper}</span>
+          )}
+          {error && (
+            <span id={errorId} className="error" role="alert">{error}</span>
+          )}
+        </div>
+      );
+    });
+
+    function App() {
+      const [email, setEmail] = useState("");
+      const [touched, setTouched] = useState(false);
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const error = touched && !isValid ? "Introduce un correo valido" : undefined;
+
+      return (
+        <form onSubmit={(e) => e.preventDefault()}>
+          <section>
+            <h2>Caso comun, con helper</h2>
+            <Input
+              label="Correo electronico"
+              helper="Te enviaremos la confirmacion aqui"
+              type="email"
+              placeholder="tu@empresa.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setTouched(true)}
+            />
+            {error && <p className="hint">El error de abajo aparece cuando haces blur con un correo invalido.</p>}
+          </section>
+
+          <section>
+            <h2>Con error</h2>
+            <Input
+              label="Correo electronico"
+              helper="Te enviaremos la confirmacion aqui"
+              type="email"
+              defaultValue="no-es-un-correo"
+              error="Introduce un correo valido"
+            />
+            <p className="hint">
+              El helper desaparece cuando hay error. El error tiene
+              <code>role="alert"</code> para que el screen reader lo anuncie.
+            </p>
+          </section>
+
+          <section>
+            <h2>Disabled</h2>
+            <Input
+              label="ID interno"
+              defaultValue="USR-7841"
+              disabled
+              helper="Generado automaticamente, no se puede editar"
+            />
+          </section>
+
+          <section>
+            <h2>Label oculto visualmente (no para screen readers)</h2>
+            <Input
+              label="Buscar"
+              type="search"
+              placeholder="Buscar..."
+              visuallyHiddenLabel
+            />
+            <p className="hint">
+              El label sigue existiendo en el DOM con clase
+              <code>visually-hidden</code>, accesible para screen readers.
+              Usar solo en barras de busqueda compactas con icono de lupa.
+            </p>
+          </section>
+        </form>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>

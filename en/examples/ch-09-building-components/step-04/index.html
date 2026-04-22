@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example 09_04 - Select with Radix</title>
+  <link rel="stylesheet" href="./styles.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react":              "https://esm.sh/react@18",
+      "react-dom":          "https://esm.sh/react-dom@18",
+      "react-dom/client":   "https://esm.sh/react-dom@18/client",
+      "@radix-ui/react-select": "https://esm.sh/@radix-ui/react-select@2"
+    }
+  }
+  </script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Select</h1>
+    <p>
+      The native Select is ugly and inconsistent across platforms. Built
+      on Radix UI you get keyboard navigation, type-to-jump, escape to
+      close and portal to escape the parent's overflow, all for free.
+      Your job is to style it.
+    </p>
+
+    <div id="root"></div>
+
+    <p class="hint">
+      Open with click or Enter. Navigate with arrows. Close with Escape.
+      Type a letter to jump to the first matching item. All from Radix.
+    </p>
+  </main>
+
+  <script type="text/babel" data-type="module" data-presets="typescript,react">
+    import React, { useState, useId } from "react";
+    import { createRoot } from "react-dom/client";
+    import * as RadixSelect from "@radix-ui/react-select";
+
+    interface Option { value: string; label: string; }
+
+    interface SelectProps {
+      label: string;
+      value: string;
+      onValueChange: (value: string) => void;
+      options: Option[];
+      placeholder?: string;
+    }
+
+    function Select({ label, value, onValueChange, options, placeholder }: SelectProps) {
+      const id = useId();
+      return (
+        <div className="field">
+          <label htmlFor={id} className="label">{label}</label>
+          <RadixSelect.Root value={value} onValueChange={onValueChange}>
+            <RadixSelect.Trigger id={id} className="select-trigger" data-trigger>
+              <RadixSelect.Value placeholder={placeholder ?? "Select..."} />
+              <RadixSelect.Icon className="select-icon">&#9662;</RadixSelect.Icon>
+            </RadixSelect.Trigger>
+
+            <RadixSelect.Portal>
+              <RadixSelect.Content className="select-content" data-content position="popper" sideOffset={4}>
+                <RadixSelect.Viewport>
+                  {options.map((opt) => (
+                    <RadixSelect.Item key={opt.value} value={opt.value} className="select-item" data-item>
+                      <RadixSelect.ItemText>{opt.label}</RadixSelect.ItemText>
+                      <RadixSelect.ItemIndicator className="select-check">&#10003;</RadixSelect.ItemIndicator>
+                    </RadixSelect.Item>
+                  ))}
+                </RadixSelect.Viewport>
+              </RadixSelect.Content>
+            </RadixSelect.Portal>
+          </RadixSelect.Root>
+        </div>
+      );
+    }
+
+    function App() {
+      const countries: Option[] = [
+        { value: "uk", label: "United Kingdom" },
+        { value: "es", label: "Spain" },
+        { value: "fr", label: "France" },
+        { value: "de", label: "Germany" },
+        { value: "it", label: "Italy" },
+        { value: "pt", label: "Portugal" },
+        { value: "ie", label: "Ireland" },
+        { value: "nl", label: "Netherlands" },
+      ];
+      const [country, setCountry] = useState("uk");
+
+      return (
+        <section>
+          <Select
+            label="Country"
+            value={country}
+            onValueChange={setCountry}
+            options={countries}
+          />
+          <p className="hint" style={{ marginTop: "1rem" }}>
+            Selected value: <code>{country}</code>
+          </p>
+        </section>
+      );
+    }
+
+    const root = createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>

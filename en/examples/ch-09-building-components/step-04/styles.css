@@ -1,0 +1,104 @@
+:root {
+  --color-text: #1a1a1a;
+  --color-text-muted: #6a6a6a;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f4f5;
+  --color-border: #d4d4d8;
+  --color-border-strong: #a1a1aa;
+  --color-focus: #1F6FEB;
+  --color-emerald: #10b981;
+  --color-emerald-soft: rgba(16, 185, 129, 0.1);
+
+  --radius: 8px;
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: #fafafa;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+p  { color: var(--color-text-muted); }
+.hint { font-size: 0.85rem; }
+code { background: var(--color-surface-muted); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+
+/* Field */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 280px;
+}
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Trigger, identico al estilo de un Input */
+.select-trigger {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.select-trigger:hover { border-color: var(--color-border-strong); }
+.select-trigger:focus {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-focus) 25%, transparent);
+}
+.select-icon { color: var(--color-text-muted); }
+
+/* Content (panel desplegado, en portal) */
+.select-content {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 0.25rem;
+  min-width: var(--radix-select-trigger-width);
+  max-height: 300px;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  font: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+.select-item[data-highlighted] {
+  background: var(--color-emerald-soft);
+  color: var(--color-text);
+}
+.select-item[data-state="checked"] {
+  font-weight: 500;
+}
+.select-check { color: var(--color-emerald); margin-left: 0.5rem; }

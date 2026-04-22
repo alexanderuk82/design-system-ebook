@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 09_06 - Modal accesible con Radix Dialog</title>
+  <link rel="stylesheet" href="./styles.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "react":              "https://esm.sh/react@18",
+      "react-dom":          "https://esm.sh/react-dom@18",
+      "react-dom/client":   "https://esm.sh/react-dom@18/client",
+      "@radix-ui/react-dialog": "https://esm.sh/@radix-ui/react-dialog@1"
+    }
+  }
+  </script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Modal accesible</h1>
+    <p>
+      Construir un modal accesible bien desde cero es trabajo de un mes.
+      Radix Dialog te da focus trap, escape para cerrar, body scroll lock,
+      portal, ARIA dialog, retorno de foco al disparador. Tu trabajo es
+      estilizar y conectar el state.
+    </p>
+
+    <div id="root"></div>
+
+    <p class="hint">
+      Tres formas de cerrar: boton X, tecla Escape, click en el overlay.
+      Tab navega solo dentro del modal (focus trap). Cuando cierras, el
+      foco vuelve al boton que lo abrio.
+    </p>
+  </main>
+
+  <script type="text/babel" data-type="module" data-presets="typescript,react">
+    import React, { useState } from "react";
+    import { createRoot } from "react-dom/client";
+    import * as Dialog from "@radix-ui/react-dialog";
+
+    type ModalSize = "sm" | "md" | "lg";
+
+    interface ModalProps {
+      open: boolean;
+      onOpenChange: (open: boolean) => void;
+      title: string;
+      description?: string;
+      size?: ModalSize;
+      children: React.ReactNode;
+    }
+
+    function Modal({ open, onOpenChange, title, description, size = "md", children }: ModalProps) {
+      return (
+        <Dialog.Root open={open} onOpenChange={onOpenChange}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="modal-overlay" />
+            <Dialog.Content className="modal-content" data-size={size}>
+              <Dialog.Title className="modal-title">{title}</Dialog.Title>
+              {description && (
+                <Dialog.Description className="modal-description">
+                  {description}
+                </Dialog.Description>
+              )}
+              <div className="modal-body">{children}</div>
+              <Dialog.Close className="modal-close" aria-label="Cerrar">
+                &times;
+              </Dialog.Close>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      );
+    }
+
+    function App() {
+      const [isPublishing, setIsPublishing] = useState(false);
+      const [hasPublished, setHasPublished] = useState(false);
+
+      const publish = () => {
+        setHasPublished(true);
+        setIsPublishing(false);
+      };
+
+      return (
+        <section>
+          <button className="btn btn-primary" onClick={() => setIsPublishing(true)}>
+            Publicar release
+          </button>
+          {hasPublished && (
+            <p className="status">Publicacion enviada (demo).</p>
+          )}
+
+          <Modal
+            open={isPublishing}
+            onOpenChange={setIsPublishing}
+            title="Confirmar publicacion"
+            description="Revisa los cambios antes de subir"
+          >
+            <p>Vas a publicar 14 cambios en 3 plataformas.</p>
+            <div className="actions">
+              <button className="btn" onClick={() => setIsPublishing(false)}>Cancelar</button>
+              <button className="btn btn-primary" onClick={publish}>Publicar ahora</button>
+            </div>
+          </Modal>
+        </section>
+      );
+    }
+
+    const root = createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>

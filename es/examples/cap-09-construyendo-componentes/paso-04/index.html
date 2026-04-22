@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 09_04 - Select con Radix</title>
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- Importmap para que Babel module pueda resolver imports vs ESM CDN -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react":              "https://esm.sh/react@18",
+      "react-dom":          "https://esm.sh/react-dom@18",
+      "react-dom/client":   "https://esm.sh/react-dom@18/client",
+      "@radix-ui/react-select": "https://esm.sh/@radix-ui/react-select@2"
+    }
+  }
+  </script>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Select</h1>
+    <p>
+      El Select nativo es feo e inconsistente entre plataformas. Construido
+      sobre Radix UI obtienes navegacion con teclado, type-to-jump, escape
+      para cerrar y portal para escapar del overflow del padre, todo gratis.
+      Tu trabajo es estilizar.
+    </p>
+
+    <div id="root"></div>
+
+    <p class="hint">
+      Abre con click o Enter. Navega con flechas. Cierra con Escape. Tipea
+      una letra para saltar al primer item que coincide. Todo viene de Radix.
+    </p>
+  </main>
+
+  <script type="text/babel" data-type="module" data-presets="typescript,react">
+    import React, { useState, useId } from "react";
+    import { createRoot } from "react-dom/client";
+    import * as RadixSelect from "@radix-ui/react-select";
+
+    interface Option {
+      value: string;
+      label: string;
+    }
+
+    interface SelectProps {
+      label: string;
+      value: string;
+      onValueChange: (value: string) => void;
+      options: Option[];
+      placeholder?: string;
+    }
+
+    function Select({ label, value, onValueChange, options, placeholder }: SelectProps) {
+      const id = useId();
+      return (
+        <div className="field">
+          <label htmlFor={id} className="label">{label}</label>
+          <RadixSelect.Root value={value} onValueChange={onValueChange}>
+            <RadixSelect.Trigger id={id} className="select-trigger" data-trigger>
+              <RadixSelect.Value placeholder={placeholder ?? "Selecciona..."} />
+              <RadixSelect.Icon className="select-icon">&#9662;</RadixSelect.Icon>
+            </RadixSelect.Trigger>
+
+            <RadixSelect.Portal>
+              <RadixSelect.Content className="select-content" data-content position="popper" sideOffset={4}>
+                <RadixSelect.Viewport>
+                  {options.map((opt) => (
+                    <RadixSelect.Item key={opt.value} value={opt.value} className="select-item" data-item>
+                      <RadixSelect.ItemText>{opt.label}</RadixSelect.ItemText>
+                      <RadixSelect.ItemIndicator className="select-check">&#10003;</RadixSelect.ItemIndicator>
+                    </RadixSelect.Item>
+                  ))}
+                </RadixSelect.Viewport>
+              </RadixSelect.Content>
+            </RadixSelect.Portal>
+          </RadixSelect.Root>
+        </div>
+      );
+    }
+
+    function App() {
+      const countries: Option[] = [
+        { value: "es", label: "Espana" },
+        { value: "uk", label: "Reino Unido" },
+        { value: "fr", label: "Francia" },
+        { value: "de", label: "Alemania" },
+        { value: "it", label: "Italia" },
+        { value: "pt", label: "Portugal" },
+        { value: "ie", label: "Irlanda" },
+        { value: "nl", label: "Paises Bajos" },
+      ];
+      const [country, setCountry] = useState("es");
+
+      return (
+        <section>
+          <Select
+            label="Pais"
+            value={country}
+            onValueChange={setCountry}
+            options={countries}
+          />
+          <p className="hint" style={{ marginTop: "1rem" }}>
+            Valor seleccionado: <code>{country}</code>
+          </p>
+        </section>
+      );
+    }
+
+    const root = createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>

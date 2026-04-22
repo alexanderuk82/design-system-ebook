@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 09_07 - Navigation accesible</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <h1>Navigation accesible</h1>
+    <p>
+      El estado activo lo lleva <code>aria-current="page"</code>, no una
+      classname paralela. El CSS decora el atributo. Un usuario con screen
+      reader escucha donde esta, no solo lo ve.
+    </p>
+
+    <div id="root"></div>
+  </main>
+
+  <script type="text/babel" data-presets="typescript,react">
+    const { useState } = React;
+
+    interface NavItem {
+      href: string;
+      label: string;
+      icon?: React.ReactNode;
+    }
+
+    interface NavigationProps {
+      items: NavItem[];
+      currentPath: string;
+      label?: string;   // aria-label para distinguir navs multiples
+      onNavigate?: (href: string) => void;  // para este demo, en produccion useRouter
+    }
+
+    function Navigation({ items, currentPath, label = "Principal", onNavigate }: NavigationProps) {
+      return (
+        <nav aria-label={label} className="nav">
+          <ul className="nav-list">
+            {items.map((item) => {
+              const isActive = item.href === currentPath;
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className="nav-item"
+                    onClick={(e) => {
+                      if (onNavigate) {
+                        e.preventDefault();
+                        onNavigate(item.href);
+                      }
+                    }}
+                  >
+                    {item.icon && <span className="nav-icon" aria-hidden="true">{item.icon}</span>}
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      );
+    }
+
+    function App() {
+      const [pathname, setPathname] = useState("/");
+
+      const main: NavItem[] = [
+        { href: "/",           label: "Inicio",      icon: "⌂" },
+        { href: "/components", label: "Componentes", icon: "▢" },
+        { href: "/tokens",     label: "Tokens",      icon: "◇" },
+        { href: "/guias",      label: "Guias",       icon: "✪" },
+      ];
+
+      const footer: NavItem[] = [
+        { href: "/about",   label: "Sobre el proyecto" },
+        { href: "/changes", label: "Changelog" },
+        { href: "/rfc",     label: "RFCs" },
+      ];
+
+      return (
+        <div>
+          <section>
+            <h2>Nav principal (con iconos)</h2>
+            <Navigation
+              items={main}
+              currentPath={pathname}
+              label="Principal"
+              onNavigate={setPathname}
+            />
+            <p className="hint">
+              Click un item. El estado activo cambia y el
+              <code>aria-current="page"</code> salta con el.
+            </p>
+          </section>
+
+          <section>
+            <h2>Nav del footer (mismo componente, otra etiqueta ARIA)</h2>
+            <Navigation
+              items={footer}
+              currentPath={pathname}
+              label="Enlaces del footer"
+              onNavigate={setPathname}
+            />
+            <p className="hint">
+              Dos <code>&lt;nav&gt;</code> en la misma pagina necesitan
+              <code>aria-label</code> distintos para que un screen reader pueda
+              distinguirlos en la lista de landmarks.
+            </p>
+          </section>
+
+          <p className="status">
+            Path actual: <code>{pathname}</code>
+          </p>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root")!);
+    root.render(<App />);
+  </script>
+</body>
+</html>
