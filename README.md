@@ -13,11 +13,11 @@ Bilingual repo (English + Español) mirroring the 15 chapters of the book that i
 
 This is the **companion code repo** for the *Design System V.1.0* ebook. The book is visual-first and conceptual-heavy. Snippets in the book stay under 20 lines each. Full, runnable implementations live here.
 
-Each folder matches a `example_NN_NN` tag in the book:
+Each folder matches an `example_NN_NN` tag in the book:
 
 ```
 en/examples/ch-04-token-theory/step-01/   →  referenced as example_04_01 in Chapter 4
-en/examples/ch-14-codebase-setup/step-03/ →  referenced as example_14_03 in Chapter 14
+en/examples/ch-09-building-components/step-04/ →  referenced as example_09_04 in Chapter 9
 ```
 
 ### Coverage
@@ -37,24 +37,50 @@ en/examples/ch-14-codebase-setup/step-03/ →  referenced as example_14_03 in Ch
 | Phase | Scope | Status |
 | --- | --- | --- |
 | A | 86 stub folders so book links resolve | ✅ done |
-| B | Chapters 1, 2, 4, 5, 6, 7 (tokens) | ⏳ pending |
-| C | Chapters 9, 10, 12 (components) | ⏳ pending |
+| B | Chapters 1, 2, 4, 5, 6, 7 (tokens) | ✅ done |
+| C | Chapters 9, 10, 12 (components) | ✅ done |
 | D | Chapters 13, 14, 15, 16 (implementation) | ⏳ pending |
 | E | Chapters 19, 20 (advanced) | ⏳ pending |
 | F | CI, Storybook deploy, package publishing | ⏳ pending |
 
-Follow releases on [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) to see when each phase ships.
+**Shipped so far**: 20 examples × 2 languages = 40 runnable folders covering tokens, motion, multi-platform pipelines, and the first wave of accessible React components. Follow releases on [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) to see when each phase lands.
+
+### How the examples are organised
+
+The companion repo has three flavours of example, each one optimised for the lowest-friction reading experience:
+
+**1. Token examples (Fase B, chapters 1 to 7).** Each folder ships `tokens/*.json`, a small homemade `build.mjs` that resolves W3C tokens and emits CSS, an `index.html` consuming the result, and a precompiled `dist/`. Just open `index.html` in any modern browser, no install needed. The Style Dictionary example (`ch-07-multi-platform-and-sync/step-02`) is the only one that requires `npm install`.
+
+**2. Component examples (Fase C, chapter 9 most folders, plus chapter 12 step-03).** Each folder ships an `index.html` that loads React from a CDN (UMD or esm.sh via importmap when Radix is involved) and compiles the TSX in the browser with Babel standalone. Open the HTML and the component renders. No bundler, no `node_modules`. Components included: Button, Input, Select (Radix), Card (compositional), Modal (Radix), Navigation.
+
+**3. Test examples (chapter 9 step-08, chapter 10 step-01).** Real Vitest + jest-axe + `@testing-library/react` projects. These need `npm install && npm test`. They demonstrate the accessibility test patterns the book recommends (`expectNoA11yViolations` helper applied to multiple components, plus a meta-test that verifies the helper actually catches real violations).
 
 ### Run the examples
 
-Each folder will get its own `package.json` and run instructions once Phase B lands. The root repo will be a `pnpm` monorepo so you can run everything from the top:
+For the visual examples (most of the repo so far):
 
 ```bash
-pnpm install
-pnpm --filter ch-14-codebase-setup-step-01 dev
+# Just open the HTML
+start en/examples/ch-09-building-components/step-04/index.html
 ```
 
-For now, every folder contains a `README.md` describing what the example will demonstrate and linking back to the relevant book chapter.
+For the test examples:
+
+```bash
+cd en/examples/ch-09-building-components/step-08
+npm install
+npm test
+```
+
+For the Style Dictionary example:
+
+```bash
+cd en/examples/ch-07-multi-platform-and-sync/step-02
+npm install
+npm run build   # emits CSS, Swift, Kotlin, Dart from one JSON
+```
+
+When Fase D lands, the repo will turn into a `pnpm` monorepo so you can run everything from the top. Until then, each folder is self-contained with its own README.
 
 ### License
 
@@ -72,7 +98,7 @@ Cada carpeta corresponde a un tag `ejemplo_NN_NN` del libro:
 
 ```
 es/examples/cap-04-teoria-tokens/paso-01/   →  referenciado como ejemplo_04_01 en el Capítulo 4
-es/examples/cap-14-codebase-setup/paso-03/  →  referenciado como ejemplo_14_03 en el Capítulo 14
+es/examples/cap-09-construyendo-componentes/paso-04/ →  referenciado como ejemplo_09_04 en el Capítulo 9
 ```
 
 ### Cobertura
@@ -92,24 +118,50 @@ es/examples/cap-14-codebase-setup/paso-03/  →  referenciado como ejemplo_14_03
 | Fase | Alcance | Estado |
 | --- | --- | --- |
 | A | 86 carpetas stub para que los links del libro resuelvan | ✅ listo |
-| B | Capítulos 1, 2, 4, 5, 6, 7 (tokens) | ⏳ pendiente |
-| C | Capítulos 9, 10, 12 (componentes) | ⏳ pendiente |
+| B | Capítulos 1, 2, 4, 5, 6, 7 (tokens) | ✅ listo |
+| C | Capítulos 9, 10, 12 (componentes) | ✅ listo |
 | D | Capítulos 13, 14, 15, 16 (implementación) | ⏳ pendiente |
 | E | Capítulos 19, 20 (avanzado) | ⏳ pendiente |
 | F | CI, deploy Storybook, publicar packages | ⏳ pendiente |
 
-Sigue las releases en [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) para ver cuándo sale cada fase.
+**Enviado hasta ahora**: 20 ejemplos × 2 idiomas = 40 carpetas ejecutables cubriendo tokens, motion, pipelines multi-plataforma, y la primera ola de componentes React accesibles. Sigue las releases en [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) para ver cuándo aterriza cada fase.
+
+### Cómo están organizados los ejemplos
+
+El repo companion tiene tres sabores de ejemplo, cada uno pensado para la mínima fricción de lectura:
+
+**1. Ejemplos de tokens (Fase B, capítulos 1 al 7).** Cada carpeta trae `tokens/*.json`, un `build.mjs` casero que resuelve W3C tokens y emite CSS, un `index.html` que consume el resultado, y un `dist/` precompilado. Abre `index.html` en cualquier navegador moderno, no hace falta instalar nada. El ejemplo de Style Dictionary (`cap-07-multi-plataforma-y-sync/paso-02`) es el único que requiere `npm install`.
+
+**2. Ejemplos de componentes (Fase C, casi todo el capítulo 9 más cap 12 paso-03).** Cada carpeta trae un `index.html` que carga React desde un CDN (UMD o esm.sh vía importmap cuando hay Radix) y compila el TSX en el navegador con Babel standalone. Abres el HTML y el componente renderiza. Sin bundler, sin `node_modules`. Componentes incluidos: Button, Input, Select (Radix), Card (compositivo), Modal (Radix), Navigation.
+
+**3. Ejemplos de tests (capítulo 9 paso-08, capítulo 10 paso-01).** Proyectos Vitest + jest-axe + `@testing-library/react` reales. Estos sí necesitan `npm install && npm test`. Demuestran los patrones de test de accesibilidad que el libro recomienda (helper `expectNoA11yViolations` aplicado a varios componentes, más un meta-test que verifica que el helper realmente detecta violaciones reales).
 
 ### Correr los ejemplos
 
-Cada carpeta tendrá su propio `package.json` e instrucciones cuando aterrice la Fase B. El repo raíz será un monorepo `pnpm` para poder correr todo desde arriba:
+Para los ejemplos visuales (la mayoría del repo por ahora):
 
 ```bash
-pnpm install
-pnpm --filter cap-14-codebase-setup-paso-01 dev
+# Solo abre el HTML
+start es/examples/cap-09-construyendo-componentes/paso-04/index.html
 ```
 
-Por ahora, cada carpeta contiene un `README.md` que describe qué va a demostrar el ejemplo y enlaza al capítulo correspondiente del libro.
+Para los ejemplos con tests:
+
+```bash
+cd es/examples/cap-09-construyendo-componentes/paso-08
+npm install
+npm test
+```
+
+Para el ejemplo de Style Dictionary:
+
+```bash
+cd es/examples/cap-07-multi-plataforma-y-sync/paso-02
+npm install
+npm run build   # emite CSS, Swift, Kotlin, Dart desde un solo JSON
+```
+
+Cuando aterrice la Fase D, el repo pasará a ser un monorepo `pnpm` y podrás correr todo desde arriba. Hasta entonces, cada carpeta es auto-contenida con su propio README.
 
 ### Licencia
 
