@@ -1,0 +1,11 @@
+{
+  "color": {
+    "intent": {
+      "action-primary": {
+        "$value": "{color.brand.500}",
+        "$type": "color",
+        "$description": "Main interactive colour. Encodes the principle 'clarity beats cleverness': interactive elements must be visually unambiguous, so the action colour is held against the brand at full strength."
+      }
+    }
+  }
+}

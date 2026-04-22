@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 02_01 - Intencion sobre valor</title>
+  <link rel="stylesheet" href="./dist/variables.css">
+  <style>
+    :root { color-scheme: light; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.55;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p { color: #4a4a4a; }
+    code {
+      background: #f4f4f5;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .button-primary {
+      background: var(--color-action-primary);
+      color: white;
+      border: 0;
+      padding: var(--spacing-button-horizontal) calc(var(--spacing-button-horizontal) * 2);
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+    .button-primary:hover { filter: brightness(1.08); }
+  </style>
+</head>
+<body>
+  <h1>Intencion sobre valor</h1>
+  <p>
+    Este boton no sabe nada de azul ni de 8 pixeles. Sabe que su color es
+    <code>--color-action-primary</code> y su padding usa
+    <code>--spacing-button-horizontal</code>. La marca cambia el azul, los
+    pixeles cambian el ritmo, y el boton hereda sin enterarse.
+  </p>
+  <button type="button" class="button-primary">Guardar cambios</button>
+</body>
+</html>

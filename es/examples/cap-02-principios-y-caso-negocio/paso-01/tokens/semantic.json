@@ -1,0 +1,20 @@
+{
+  "color": {
+    "action": {
+      "primary": {
+        "$value": "{color.blue.500}",
+        "$type": "color",
+        "$description": "Color de la accion primaria. Aqui ya hay intencion, no solo un hex."
+      }
+    }
+  },
+  "spacing": {
+    "button": {
+      "horizontal": {
+        "$value": "{size.space.100}",
+        "$type": "dimension",
+        "$description": "Espaciado horizontal del boton. Mide en intenciones, no en pixeles."
+      }
+    }
+  }
+}

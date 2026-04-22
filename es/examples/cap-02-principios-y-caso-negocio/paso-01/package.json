@@ -1,0 +1,10 @@
+{
+  "name": "ejemplo-02-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Capitulo 2: separar la intencion del valor en dos capas de tokens.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

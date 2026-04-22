@@ -1,0 +1,20 @@
+{
+  "color": {
+    "blue": {
+      "500": {
+        "$value": "#0052CC",
+        "$type": "color",
+        "$description": "Azul de marca, valor primitivo. Solo es un hex, todavia no significa nada."
+      }
+    }
+  },
+  "size": {
+    "space": {
+      "100": {
+        "$value": "8px",
+        "$type": "dimension",
+        "$description": "Unidad base de espaciado, primitiva. Solo es 8px."
+      }
+    }
+  }
+}

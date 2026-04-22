@@ -1,0 +1,11 @@
+{
+  "color": {
+    "brand": {
+      "500": {
+        "$value": "#1F6FEB",
+        "$type": "color",
+        "$description": "Brand blue at primitive level. Pure value, no role yet."
+      }
+    }
+  }
+}

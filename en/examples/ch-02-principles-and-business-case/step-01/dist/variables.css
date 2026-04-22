@@ -1,0 +1,7 @@
+:root {
+  /* Main interactive colour. Encodes the principle 'clarity beats cleverness': interactive elements must be visually unambiguous, so the action colour is held against the brand at full strength. */
+  --color-intent-action-primary: #1F6FEB;
+
+  /* Brand blue at primitive level. Pure value, no role yet. */
+  --color-brand-500: #1F6FEB;
+}

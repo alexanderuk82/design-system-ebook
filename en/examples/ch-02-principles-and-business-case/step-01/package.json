@@ -1,0 +1,10 @@
+{
+  "name": "example-02-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 2: principles encoded as tokens, with $description carrying the rationale.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}
