@@ -1,0 +1,11 @@
+{
+  "color": {
+    "blue": {
+      "500": {
+        "$value": "#1F6FEB",
+        "$type": "color",
+        "$description": "Brand blue at the primitive level. Just a value, no meaning attached yet."
+      }
+    }
+  }
+}

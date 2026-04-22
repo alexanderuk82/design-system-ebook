@@ -1,0 +1,11 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "$value": "{color.blue.500}",
+        "$type": "color",
+        "$description": "Brand primary colour. This one carries a role, it points at the primitive color.blue.500."
+      }
+    }
+  }
+}

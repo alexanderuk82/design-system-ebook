@@ -1,0 +1,11 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "$value": "{color.blue.500}",
+        "$type": "color",
+        "$description": "Color primario de marca. Aqui ya tiene rol de uso, apunta al primitivo color.blue.500."
+      }
+    }
+  }
+}

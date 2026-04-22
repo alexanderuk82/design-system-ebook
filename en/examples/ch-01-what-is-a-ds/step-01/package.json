@@ -1,0 +1,10 @@
+{
+  "name": "example-01-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 1: from JSON token to rendered button.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 01_01 - De token a botón</title>
+  <link rel="stylesheet" href="./dist/variables.css">
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.55;
+      color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p { color: #4a4a4a; }
+    code {
+      background: #f4f4f5;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .button-primary {
+      background: var(--color-brand-primary);
+      color: white;
+      border: 0;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+    .button-primary:hover { filter: brightness(1.08); }
+  </style>
+</head>
+<body>
+  <h1>Del token al botón</h1>
+  <p>
+    El color del botón sale de <code>--color-brand-primary</code>,
+    que apunta a <code>--color-blue-500</code>. Cambias el primitivo
+    en el JSON, corres el build, y este botón se entera sin que nadie
+    le haya tocado una línea.
+  </p>
+  <button type="button" class="button-primary">Acción primaria</button>
+</body>
+</html>
