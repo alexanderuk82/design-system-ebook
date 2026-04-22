@@ -1,0 +1,10 @@
+{
+  "name": "ejemplo-07-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Capitulo 7: el mismo token JSON traducido a CSS, Swift, Kotlin y Dart.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

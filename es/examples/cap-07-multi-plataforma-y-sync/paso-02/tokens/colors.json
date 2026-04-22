@@ -1,0 +1,11 @@
+{
+  "color": {
+    "brand": {
+      "primary":   { "value": "#0052CC", "type": "color" },
+      "secondary": { "value": "#7B1FA2", "type": "color" }
+    },
+    "text": {
+      "primary": { "value": "#1A1A1A", "type": "color" }
+    }
+  }
+}

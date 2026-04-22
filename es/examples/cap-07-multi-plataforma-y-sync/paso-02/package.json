@@ -1,0 +1,13 @@
+{
+  "name": "ejemplo-07-02",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Capitulo 7: Style Dictionary configurado para emitir 4 plataformas.",
+  "scripts": {
+    "build": "style-dictionary build --config style-dictionary.config.js",
+    "clean": "node -e \"require('node:fs').rmSync('build', { recursive: true, force: true })\""
+  },
+  "devDependencies": {
+    "style-dictionary": "^3.9.2"
+  }
+}
