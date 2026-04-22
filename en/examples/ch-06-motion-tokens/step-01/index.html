@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example 06_01 - Motion tokens in CSS</title>
+  <link rel="stylesheet" href="./dist/variables.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem;
+      line-height: 1.55; color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p { color: #4a4a4a; }
+    code { background: #f4f4f5; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+
+    button.action {
+      font: inherit; padding: 0.6rem 1.2rem; border-radius: 8px;
+      border: 0; background: #1a1a1a; color: white; cursor: pointer;
+      transition:
+        transform var(--motion-duration-fast) var(--motion-ease-out),
+        background var(--motion-duration-fast) var(--motion-ease-out);
+    }
+    button.action:hover { background: #333; transform: translateY(-1px); }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      display: none; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity var(--motion-duration-slow) var(--motion-ease-out);
+    }
+    .modal-backdrop.open { display: flex; opacity: 1; }
+    .modal {
+      background: white; border-radius: 12px;
+      padding: 1.5rem 1.75rem; min-width: 300px; max-width: 420px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+      transform: translateY(8px) scale(0.98); opacity: 0;
+      transition:
+        transform var(--motion-duration-slow) var(--motion-ease-out),
+        opacity   var(--motion-duration-slow) var(--motion-ease-out);
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); opacity: 1; }
+
+    .toast {
+      position: fixed; bottom: 1.25rem; left: 50%;
+      transform: translateX(-50%) translateY(20px); opacity: 0;
+      background: #1a1a1a; color: white; padding: 0.75rem 1.25rem; border-radius: 8px;
+      transition:
+        transform var(--motion-duration-normal) var(--motion-ease-emphasized),
+        opacity   var(--motion-duration-normal) var(--motion-ease-emphasized);
+    }
+    .toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; margin: 1.25rem 0; }
+    .swatch { background: #f9fafb; border-radius: 8px; padding: 0.75rem; font-size: 0.85em; }
+    .swatch strong { display: block; font-family: ui-monospace, Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <h1>Motion tokens in CSS</h1>
+  <p>
+    The modal uses <code>--motion-duration-slow</code> with <code>--motion-ease-out</code>.
+    The toast uses <code>--motion-duration-normal</code> with <code>--motion-ease-emphasized</code>.
+    The button uses <code>--motion-duration-fast</code>. Components do not know values,
+    they only know token names.
+  </p>
+
+  <button class="action" type="button" id="open-modal">Open modal</button>
+  &nbsp;
+  <button class="action" type="button" id="show-toast">Show toast</button>
+
+  <h2 style="margin-top: 2rem; font-size: 1rem; color: #6a6a6a;">Available tokens</h2>
+  <div class="swatches" id="swatches"></div>
+
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-label="Sample modal">
+    <div class="modal">
+      <h2 style="margin: 0 0 0.5rem; font-size: 1.15rem;">Animated modal</h2>
+      <p>This modal enters and leaves with duration <code>slow</code> (400ms) and easing <code>out</code>.</p>
+      <button class="action" type="button" id="close-modal">Close</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status">Saved successfully</div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    document.getElementById("open-modal").addEventListener("click", () => modal.classList.add("open"));
+    document.getElementById("close-modal").addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+
+    const toast = document.getElementById("toast");
+    document.getElementById("show-toast").addEventListener("click", () => {
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 1800);
+    });
+
+    const families = [
+      ["motion-duration-fast","fast","150ms"],
+      ["motion-duration-normal","normal","250ms"],
+      ["motion-duration-slow","slow","400ms"],
+      ["motion-duration-slower","slower","600ms"],
+      ["motion-ease-out","ease.out","cubic-bezier"],
+      ["motion-ease-in","ease.in","cubic-bezier"],
+      ["motion-ease-in-out","ease.in-out","cubic-bezier"],
+      ["motion-ease-emphasized","ease.emphasized","cubic-bezier"],
+    ];
+    document.getElementById("swatches").innerHTML = families.map(([name,label,val]) =>
+      `<div class="swatch"><strong>--${name}</strong>${label} = ${val}</div>`).join("");
+  </script>
+</body>
+</html>

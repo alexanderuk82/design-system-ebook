@@ -1,0 +1,10 @@
+{
+  "name": "example-06-03",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 6: prefers-reduced-motion implemented at the token layer.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

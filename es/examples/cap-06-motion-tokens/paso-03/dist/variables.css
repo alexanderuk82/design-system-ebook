@@ -1,0 +1,26 @@
+/* Motion tokens primitivos */
+:root {
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 250ms;
+  --motion-duration-slow: 400ms;
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Override automatico cuando el usuario activa reduce motion en el OS.
+   Cualquier componente que consuma estos tokens hereda el cambio,
+   sin necesidad de tocar codigo de componentes. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0.01ms;
+    --motion-duration-normal: 0.01ms;
+    --motion-duration-slow: 0.01ms;
+  }
+}
+
+/* Override manual via clase. Util para un toggle dentro del producto.
+   Ver index.html: el boton 'Reducir animaciones' anade .reduced al <html>. */
+html.reduced {
+  --motion-duration-fast: 0.01ms;
+  --motion-duration-normal: 0.01ms;
+  --motion-duration-slow: 0.01ms;
+}

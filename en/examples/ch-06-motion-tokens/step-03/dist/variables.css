@@ -1,0 +1,26 @@
+/* Primitive motion tokens */
+:root {
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 250ms;
+  --motion-duration-slow: 400ms;
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Automatic override when the user enables reduce motion in the OS.
+   Any component that consumes these tokens inherits the change,
+   no need to touch component code. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0.01ms;
+    --motion-duration-normal: 0.01ms;
+    --motion-duration-slow: 0.01ms;
+  }
+}
+
+/* Manual override via class. Useful for an in-product toggle.
+   See index.html: the 'Reduce animations' button adds .reduced to <html>. */
+html.reduced {
+  --motion-duration-fast: 0.01ms;
+  --motion-duration-normal: 0.01ms;
+  --motion-duration-slow: 0.01ms;
+}

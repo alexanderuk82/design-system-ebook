@@ -1,0 +1,10 @@
+{
+  "name": "ejemplo-06-02",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Capitulo 6: motion tokens compilados de JSON a Dart para Flutter.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

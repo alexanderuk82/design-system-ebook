@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example 06_03 - Reduced motion at the token layer</title>
+  <link rel="stylesheet" href="./dist/variables.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem;
+      line-height: 1.55; color: #1a1a1a;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p { color: #4a4a4a; }
+    code { background: #f4f4f5; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+
+    button.action {
+      font: inherit; padding: 0.6rem 1.2rem; border-radius: 8px;
+      border: 0; background: #1a1a1a; color: white; cursor: pointer; margin-right: 0.5rem;
+      transition: background var(--motion-duration-fast) var(--motion-ease-out);
+    }
+    button.action:hover { background: #333; }
+
+    .toggle-row {
+      background: #f9fafb; border-radius: 8px; padding: 0.85rem 1rem;
+      margin: 1rem 0; display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      display: none; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity var(--motion-duration-slow) var(--motion-ease-out);
+    }
+    .modal-backdrop.open { display: flex; opacity: 1; }
+    .modal {
+      background: white; border-radius: 12px;
+      padding: 1.5rem 1.75rem; min-width: 300px; max-width: 420px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+      transform: translateY(8px) scale(0.98); opacity: 0;
+      transition:
+        transform var(--motion-duration-slow) var(--motion-ease-out),
+        opacity   var(--motion-duration-slow) var(--motion-ease-out);
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); opacity: 1; }
+
+    .status {
+      font-size: 0.85rem; color: #6a6a6a; margin-top: 0.5rem;
+    }
+    .status strong { color: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <h1>Reduced motion at the token layer</h1>
+  <p>
+    The same modal as <code>step-01</code>. The difference: this folder
+    defines an override in <code>@media (prefers-reduced-motion: reduce)</code>
+    that collapses every duration to 0.01ms. The component knows nothing,
+    the override lives in the token layer.
+  </p>
+
+  <div class="toggle-row">
+    <input type="checkbox" id="manual-toggle">
+    <label for="manual-toggle">
+      Force reduce motion (manual override via <code>html.reduced</code>,
+      useful for an in-product toggle that does not depend on the OS setting).
+    </label>
+  </div>
+
+  <button class="action" type="button" id="open-modal">Open modal</button>
+
+  <div class="status" id="status"></div>
+
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2 style="margin: 0 0 0.5rem; font-size: 1.15rem;">Animated modal</h2>
+      <p>If reduce motion is active, this modal pops in instantly without animation.</p>
+      <button class="action" type="button" id="close-modal">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    document.getElementById("open-modal").addEventListener("click", () => modal.classList.add("open"));
+    document.getElementById("close-modal").addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+
+    const toggle = document.getElementById("manual-toggle");
+    toggle.addEventListener("change", (e) => {
+      document.documentElement.classList.toggle("reduced", e.target.checked);
+      updateStatus();
+    });
+
+    const status = document.getElementById("status");
+    function updateStatus() {
+      const osPref = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const manual = document.documentElement.classList.contains("reduced");
+      const active = osPref || manual;
+      status.innerHTML = `
+        OS says reduce motion: <strong>${osPref ? "yes" : "no"}</strong> ·
+        Manual override: <strong>${manual ? "yes" : "no"}</strong> ·
+        Result: <strong>${active ? "animations collapsed" : "animations normal"}</strong>
+      `;
+    }
+    window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", updateStatus);
+    updateStatus();
+  </script>
+</body>
+</html>

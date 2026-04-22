@@ -1,0 +1,9 @@
+{
+  "motion": {
+    "duration": {
+      "fast":   { "$value": "0.01ms", "$type": "duration", "$description": "Override para reduced motion. No 0 porque rompe transitionend." },
+      "normal": { "$value": "0.01ms", "$type": "duration" },
+      "slow":   { "$value": "0.01ms", "$type": "duration" }
+    }
+  }
+}
