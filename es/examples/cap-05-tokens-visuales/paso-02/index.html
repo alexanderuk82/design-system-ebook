@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 05_02 - Tipografia fluida con clamp</title>
+  <link rel="stylesheet" href="./dist/variables.css">
+  <style>
+    body {
+      font-family: var(--font-family-sans);
+      font-size: var(--font-size-body);
+      line-height: var(--font-leading-body);
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      color: #1a1a1a;
+      background: #fafafa;
+    }
+    h1, h2, h3, h4 {
+      font-weight: var(--font-weight-heading);
+      line-height: var(--font-leading-heading);
+      letter-spacing: var(--font-tracking-heading);
+      margin: 1.5rem 0 0.5rem;
+    }
+    h1 { font-size: var(--font-size-h1); }
+    h2 { font-size: var(--font-size-h2); }
+    h3 { font-size: var(--font-size-h3); }
+    h4 { font-size: var(--font-size-h4); }
+    h5 { font-size: var(--font-size-h5); font-weight: var(--font-weight-heading); }
+    h6 { font-size: var(--font-size-h6); font-weight: var(--font-weight-emphasis); }
+    .body-sm { font-size: var(--font-size-body-sm); color: #4a4a4a; }
+    .caption {
+      font-size: var(--font-size-caption);
+      letter-spacing: var(--font-tracking-caption);
+      text-transform: uppercase;
+      color: #6a6a6a;
+    }
+    .specimen {
+      background: white;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .meta {
+      font-family: ui-monospace, "SF Mono", Consolas, monospace;
+      font-size: 0.78rem;
+      color: #6a6a6a;
+      margin-top: 0.25rem;
+    }
+    .hint {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: #7c2d12;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hint">
+    Redimensiona la ventana del navegador. Los tamanos H1 a H4 escalan
+    suavemente sin saltos. H5, H6, body y caption se quedan fijos.
+    Cero media queries en este archivo.
+  </div>
+
+  <div class="specimen">
+    <h1>Heading H1 fluido</h1>
+    <div class="meta">--font-size-h1 = clamp(2.375rem, 1.5rem + 3vw, 3rem)</div>
+  </div>
+
+  <div class="specimen">
+    <h2>Heading H2 fluido</h2>
+    <div class="meta">--font-size-h2 = clamp(1.875rem, 1.4rem + 2vw, 2.375rem)</div>
+  </div>
+
+  <div class="specimen">
+    <h3>Heading H3 fluido</h3>
+    <div class="meta">--font-size-h3 = clamp(1.5rem, 1.2rem + 1.4vw, 1.875rem)</div>
+  </div>
+
+  <div class="specimen">
+    <h4>Heading H4 fluido</h4>
+    <div class="meta">--font-size-h4 = clamp(1.25rem, 1rem + 1vw, 1.5rem)</div>
+  </div>
+
+  <div class="specimen">
+    <h5>Heading H5 fijo en 24px</h5>
+    <div class="meta">--font-size-h5 = 1.5rem (font.size.4 primitivo)</div>
+  </div>
+
+  <div class="specimen">
+    <h6>Heading H6 fijo en 20px</h6>
+    <div class="meta">--font-size-h6 = 1.25rem (font.size.3 primitivo)</div>
+  </div>
+
+  <div class="specimen">
+    <p>Cuerpo base. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p class="body-sm">Cuerpo pequeno. Para metadatos, captions largos, ayuda contextual.</p>
+    <p class="caption">Caption con tracking abierto</p>
+    <div class="meta">body 1rem · body-sm 0.875rem · caption 0.75rem</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "example-05-02",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 5: fluid typography with clamp(), full scale H1 to caption.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

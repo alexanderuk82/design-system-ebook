@@ -1,0 +1,18 @@
+{
+  "color": {
+    "surface": {
+      "base":     { "$value": "{color.gray.900}", "$type": "color", "$description": "Fondo base en dark." },
+      "elevated": { "$value": "{color.gray.800}", "$type": "color", "$description": "Cards en dark, un punto mas claro que la base." }
+    },
+    "text": {
+      "primary":   { "$value": "{color.gray.100}", "$type": "color", "$description": "Cuerpo en dark. No usar gray.50 puro, vibra demasiado." },
+      "secondary": { "$value": "{color.gray.400}", "$type": "color" }
+    },
+    "border": {
+      "default": { "$value": "{color.gray.700}", "$type": "color" }
+    },
+    "brand": {
+      "primary": { "$value": "{color.blue.400}", "$type": "color", "$description": "Brand un punto mas claro en dark, baja saturacion percibida." }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplo 05_01 - Color OKLCH y dark mode</title>
+  <link id="tokens-css" rel="stylesheet" href="./dist/variables-light.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.55;
+      background: var(--color-surface-base);
+      color: var(--color-text-primary);
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1rem; margin: 2rem 0 0.5rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+    p { color: var(--color-text-secondary); }
+    code { font-size: 0.85em; padding: 0.1rem 0.4rem; border-radius: 4px; background: var(--color-surface-elevated); }
+    .controls { margin: 1.25rem 0; }
+    button {
+      font: inherit; padding: 0.55rem 1rem; border-radius: 6px;
+      border: 1px solid var(--color-border-default);
+      background: var(--color-surface-elevated); color: var(--color-text-primary);
+      cursor: pointer;
+    }
+    button.active { background: var(--color-brand-primary); color: white; border-color: var(--color-brand-primary); }
+    .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 0.5rem; }
+    .swatch { aspect-ratio: 1; border-radius: 4px; display: flex; align-items: end; justify-content: center; padding: 4px; font-size: 0.65rem; color: white; mix-blend-mode: difference; }
+    .card {
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border-default);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .card .title { font-weight: 600; color: var(--color-text-primary); margin-bottom: 0.25rem; }
+    .card .meta { color: var(--color-text-secondary); font-size: 0.9em; }
+    .button-primary { background: var(--color-brand-primary); color: white; border: 0; padding: 0.65rem 1.1rem; border-radius: 8px; font: inherit; cursor: pointer; margin-top: 0.85rem; }
+  </style>
+</head>
+<body>
+  <h1>Color OKLCH y dark mode</h1>
+  <p>
+    La paleta primitiva tiene 20 colores en OKLCH (azul 50 a 900 y gris 50 a 900).
+    Encima viven dos capas semantic identicas en nombre pero distintas en mapping.
+    El componente solo lee semantic, asi que cambia de modo sin enterarse.
+  </p>
+
+  <div class="controls">
+    <button id="btn-light" class="active" type="button">Light</button>
+    <button id="btn-dark" type="button">Dark</button>
+  </div>
+
+  <h2>Escala primitiva (azul)</h2>
+  <div class="scale" id="scale-blue"></div>
+  <h2>Escala primitiva (gris)</h2>
+  <div class="scale" id="scale-gray"></div>
+
+  <h2>Componentes leyendo semantic</h2>
+  <div class="card">
+    <div class="title">Tarjeta de ejemplo</div>
+    <div class="meta">Esta tarjeta usa <code>--color-surface-elevated</code> para el fondo, <code>--color-text-primary</code> para el titulo, y <code>--color-text-secondary</code> aqui debajo. Cambia de modo y mira como todo se reconfigura sin tocar HTML.</div>
+    <button class="button-primary" type="button">Accion primaria</button>
+  </div>
+
+  <script>
+    const link = document.getElementById("tokens-css");
+    const btnLight = document.getElementById("btn-light");
+    const btnDark = document.getElementById("btn-dark");
+
+    btnLight.addEventListener("click", () => {
+      link.href = "./dist/variables-light.css";
+      btnLight.classList.add("active"); btnDark.classList.remove("active");
+    });
+    btnDark.addEventListener("click", () => {
+      link.href = "./dist/variables-dark.css";
+      btnDark.classList.add("active"); btnLight.classList.remove("active");
+    });
+
+    function fillScale(target, family) {
+      const steps = ["50","100","200","300","400","500","600","700","800","900"];
+      target.innerHTML = steps.map(s => {
+        const name = `--color-${family}-${s}`;
+        return `<div class="swatch" style="background: var(${name})">${s}</div>`;
+      }).join("");
+    }
+    fillScale(document.getElementById("scale-blue"), "blue");
+    fillScale(document.getElementById("scale-gray"), "gray");
+  </script>
+</body>
+</html>

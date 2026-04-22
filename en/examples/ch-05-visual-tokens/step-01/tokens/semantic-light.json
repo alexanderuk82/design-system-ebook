@@ -1,0 +1,18 @@
+{
+  "color": {
+    "surface": {
+      "base":     { "$value": "{color.gray.50}",  "$type": "color", "$description": "Page base background." },
+      "elevated": { "$value": "{color.gray.100}", "$type": "color", "$description": "Cards, modals, panels." }
+    },
+    "text": {
+      "primary":   { "$value": "{color.gray.900}", "$type": "color" },
+      "secondary": { "$value": "{color.gray.600}", "$type": "color" }
+    },
+    "border": {
+      "default": { "$value": "{color.gray.200}", "$type": "color" }
+    },
+    "brand": {
+      "primary": { "$value": "{color.blue.500}", "$type": "color" }
+    }
+  }
+}

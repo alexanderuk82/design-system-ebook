@@ -1,0 +1,30 @@
+{
+  "font": {
+    "size": {
+      "0": { "$value": "0.75rem",   "$type": "dimension", "$description": "12px. Captions, microcopy." },
+      "1": { "$value": "0.875rem",  "$type": "dimension", "$description": "14px. Secondary text." },
+      "2": { "$value": "1rem",      "$type": "dimension", "$description": "16px. Body base." },
+      "3": { "$value": "1.25rem",   "$type": "dimension", "$description": "20px." },
+      "4": { "$value": "1.5rem",    "$type": "dimension", "$description": "24px." },
+      "5": { "$value": "1.875rem",  "$type": "dimension", "$description": "30px." },
+      "6": { "$value": "2.375rem",  "$type": "dimension", "$description": "38px." },
+      "7": { "$value": "3rem",      "$type": "dimension", "$description": "48px." }
+    },
+    "weight": {
+      "regular": { "$value": "400", "$type": "fontWeight" },
+      "medium":  { "$value": "500", "$type": "fontWeight" },
+      "bold":    { "$value": "700", "$type": "fontWeight" }
+    },
+    "leading": {
+      "tight":   { "$value": "1.1", "$type": "number" },
+      "relaxed": { "$value": "1.5", "$type": "number" }
+    },
+    "tracking": {
+      "tight": { "$value": "-0.02em", "$type": "dimension" },
+      "wide":  { "$value": "0.05em",  "$type": "dimension" }
+    },
+    "family": {
+      "sans": { "$value": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif", "$type": "fontFamily" }
+    }
+  }
+}

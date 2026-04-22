@@ -1,0 +1,28 @@
+{
+  "font": {
+    "size": {
+      "caption": { "$value": "{font.size.0}", "$type": "dimension", "$description": "Microcopy, fijo en 12px." },
+      "body-sm": { "$value": "{font.size.1}", "$type": "dimension" },
+      "body":    { "$value": "{font.size.2}", "$type": "dimension", "$description": "Cuerpo base, fijo en 16px." },
+      "h6":      { "$value": "{font.size.3}", "$type": "dimension" },
+      "h5":      { "$value": "{font.size.4}", "$type": "dimension" },
+      "h4":      { "$value": "clamp(1.25rem, 1rem + 1vw, 1.5rem)",      "$type": "dimension", "$description": "Fluido entre 20 y 24px." },
+      "h3":      { "$value": "clamp(1.5rem, 1.2rem + 1.4vw, 1.875rem)", "$type": "dimension", "$description": "Fluido entre 24 y 30px." },
+      "h2":      { "$value": "clamp(1.875rem, 1.4rem + 2vw, 2.375rem)", "$type": "dimension", "$description": "Fluido entre 30 y 38px." },
+      "h1":      { "$value": "clamp(2.375rem, 1.5rem + 3vw, 3rem)",     "$type": "dimension", "$description": "Fluido entre 38 y 48px." }
+    },
+    "weight": {
+      "body":     { "$value": "{font.weight.regular}", "$type": "fontWeight" },
+      "emphasis": { "$value": "{font.weight.medium}",  "$type": "fontWeight" },
+      "heading":  { "$value": "{font.weight.bold}",    "$type": "fontWeight" }
+    },
+    "leading": {
+      "heading": { "$value": "{font.leading.tight}",   "$type": "number" },
+      "body":    { "$value": "{font.leading.relaxed}", "$type": "number" }
+    },
+    "tracking": {
+      "heading": { "$value": "{font.tracking.tight}", "$type": "dimension" },
+      "caption": { "$value": "{font.tracking.wide}",  "$type": "dimension" }
+    }
+  }
+}

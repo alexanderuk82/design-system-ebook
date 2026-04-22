@@ -1,0 +1,10 @@
+{
+  "name": "ejemplo-05-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Capitulo 5: escala completa OKLCH (azul + gris) con semantic light y dark.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

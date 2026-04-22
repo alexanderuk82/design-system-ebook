@@ -1,0 +1,10 @@
+{
+  "name": "ejemplo-05-02",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Capitulo 5: tipografia fluida con clamp(), escala completa H1 a caption.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

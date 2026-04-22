@@ -1,0 +1,10 @@
+{
+  "name": "example-05-01",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Chapter 5: full OKLCH scale (blue + gray) with light and dark semantic layers.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}
