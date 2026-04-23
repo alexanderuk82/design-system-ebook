@@ -39,11 +39,11 @@ en/examples/ch-09-building-components/step-04/ →  referenced as example_09_04 
 | A | 86 stub folders so book links resolve | ✅ done |
 | B | Chapters 1, 2, 4, 5, 6, 7 (tokens) | ✅ done |
 | C | Chapters 9, 10, 12 (components) | ✅ done |
-| D | Chapters 13, 14, 15, 16 (implementation) | ⏳ pending |
+| D | Chapters 13, 14, 15, 16 (implementation) | ✅ done |
 | E | Chapters 19, 20 (advanced) | ⏳ pending |
 | F | CI, Storybook deploy, package publishing | ⏳ pending |
 
-**Shipped so far**: 20 examples × 2 languages = 40 runnable folders covering tokens, motion, multi-platform pipelines, and the first wave of accessible React components. Follow releases on [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) to see when each phase lands.
+**Shipped so far**: 39 examples × 2 languages = 78 folders. Phase D adds Storybook 8, a pnpm + Turborepo monorepo, a polymorphic forwardRef Button with CSS Modules tokenised by data attributes, and a full testing pipeline (Vitest + Testing Library + vitest-axe, Storybook interaction play, Chromatic CI workflow, test-runner with axe-playwright). Follow releases on [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) to see when each phase lands.
 
 ### How the examples are organised
 
@@ -53,7 +53,9 @@ The companion repo has three flavours of example, each one optimised for the low
 
 **2. Component examples (Fase C, chapter 9 most folders, plus chapter 12 step-03).** Each folder ships an `index.html` that loads React from a CDN (UMD or esm.sh via importmap when Radix is involved) and compiles the TSX in the browser with Babel standalone. Open the HTML and the component renders. No bundler, no `node_modules`. Components included: Button, Input, Select (Radix), Card (compositional), Modal (Radix), Navigation.
 
-**3. Test examples (chapter 9 step-08, chapter 10 step-01).** Real Vitest + jest-axe + `@testing-library/react` projects. These need `npm install && npm test`. They demonstrate the accessibility test patterns the book recommends (`expectNoA11yViolations` helper applied to multiple components, plus a meta-test that verifies the helper actually catches real violations).
+**3. Test examples (chapter 9 step-08, chapter 10 step-01, chapter 16 step-01 and step-04).** Real Vitest + `@testing-library/react` projects, with `jest-axe` on the older ones and `vitest-axe` on chapter 16. These need `npm install && npm test`. They demonstrate the accessibility test patterns the book recommends (`expectNoA11yViolations` helper applied to multiple components, plus a meta-test that verifies the helper actually catches real violations).
+
+**4. Full project examples (Fase D).** Bigger, self-contained projects with their own `package.json`: the pnpm + Turborepo monorepo in chapter 14 step-01, the Vite React app with polymorphic Button in chapter 15 step-01, and the Storybook 8 setup in chapter 13 step-01. Each one is `npm install && npm run <build/dev/typecheck>` away from running. The smaller steps inside those chapters are documented extracts of the real files, so you can read them without cloning the whole project.
 
 ### Run the examples
 
@@ -80,7 +82,7 @@ npm install
 npm run build   # emits CSS, Swift, Kotlin, Dart from one JSON
 ```
 
-When Fase D lands, the repo will turn into a `pnpm` monorepo so you can run everything from the top. Until then, each folder is self-contained with its own README.
+Each folder remains self-contained with its own README so you can jump straight to the chapter you are reading without running anything else.
 
 ### License
 
@@ -120,11 +122,11 @@ es/examples/cap-09-construyendo-componentes/paso-04/ →  referenciado como ejem
 | A | 86 carpetas stub para que los links del libro resuelvan | ✅ listo |
 | B | Capítulos 1, 2, 4, 5, 6, 7 (tokens) | ✅ listo |
 | C | Capítulos 9, 10, 12 (componentes) | ✅ listo |
-| D | Capítulos 13, 14, 15, 16 (implementación) | ⏳ pendiente |
+| D | Capítulos 13, 14, 15, 16 (implementación) | ✅ listo |
 | E | Capítulos 19, 20 (avanzado) | ⏳ pendiente |
 | F | CI, deploy Storybook, publicar packages | ⏳ pendiente |
 
-**Enviado hasta ahora**: 20 ejemplos × 2 idiomas = 40 carpetas ejecutables cubriendo tokens, motion, pipelines multi-plataforma, y la primera ola de componentes React accesibles. Sigue las releases en [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) para ver cuándo aterriza cada fase.
+**Enviado hasta ahora**: 39 ejemplos × 2 idiomas = 78 carpetas. La Fase D añade Storybook 8, un monorepo pnpm + Turborepo, un Button polimórfico con forwardRef y CSS Modules tokenizados por data attributes, y un pipeline de testing completo (Vitest + Testing Library + vitest-axe, interaction play de Storybook, workflow Chromatic, test-runner con axe-playwright). Sigue las releases en [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) para ver cuándo aterriza cada fase.
 
 ### Cómo están organizados los ejemplos
 
@@ -134,7 +136,9 @@ El repo companion tiene tres sabores de ejemplo, cada uno pensado para la mínim
 
 **2. Ejemplos de componentes (Fase C, casi todo el capítulo 9 más cap 12 paso-03).** Cada carpeta trae un `index.html` que carga React desde un CDN (UMD o esm.sh vía importmap cuando hay Radix) y compila el TSX en el navegador con Babel standalone. Abres el HTML y el componente renderiza. Sin bundler, sin `node_modules`. Componentes incluidos: Button, Input, Select (Radix), Card (compositivo), Modal (Radix), Navigation.
 
-**3. Ejemplos de tests (capítulo 9 paso-08, capítulo 10 paso-01).** Proyectos Vitest + jest-axe + `@testing-library/react` reales. Estos sí necesitan `npm install && npm test`. Demuestran los patrones de test de accesibilidad que el libro recomienda (helper `expectNoA11yViolations` aplicado a varios componentes, más un meta-test que verifica que el helper realmente detecta violaciones reales).
+**3. Ejemplos de tests (capítulo 9 paso-08, capítulo 10 paso-01, capítulo 16 paso-01 y paso-04).** Proyectos Vitest + `@testing-library/react` reales, con `jest-axe` en los antiguos y `vitest-axe` en el capítulo 16. Estos sí necesitan `npm install && npm test`. Demuestran los patrones de test de accesibilidad que el libro recomienda (helper `expectNoA11yViolations` aplicado a varios componentes, más un meta-test que verifica que el helper realmente detecta violaciones reales).
+
+**4. Ejemplos de proyecto completo (Fase D).** Proyectos auto-contenidos con su propio `package.json`: el monorepo pnpm + Turborepo del capítulo 14 paso-01, la app Vite React con Button polimórfico del capítulo 15 paso-01, y el Storybook 8 del capítulo 13 paso-01. Cada uno está a un `npm install && npm run <build/dev/typecheck>` de correr. Los pasos más pequeños dentro de esos capítulos son extractos documentados de los archivos reales, para que puedas leerlos sin clonar el proyecto entero.
 
 ### Correr los ejemplos
 
@@ -161,7 +165,7 @@ npm install
 npm run build   # emite CSS, Swift, Kotlin, Dart desde un solo JSON
 ```
 
-Cuando aterrice la Fase D, el repo pasará a ser un monorepo `pnpm` y podrás correr todo desde arriba. Hasta entonces, cada carpeta es auto-contenida con su propio README.
+Cada carpeta sigue siendo auto-contenida con su propio README, así puedes saltar directamente al capítulo que estás leyendo sin correr nada más.
 
 ### Licencia
 
