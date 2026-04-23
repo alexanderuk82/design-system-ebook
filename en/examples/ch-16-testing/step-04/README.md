@@ -1,22 +1,93 @@
 # example_16_04
 
-**Chapter 16: Testing** · step 04
+**Chapter 16: Testing** · step 04 (minimum runnable a11y test)
 
-## What this will contain
+Isolated version of the Button a11y test. Four imports, one describe,
+one it. Runnable with `npm install && npm test`. The point is to show
+how small it is to add a11y coverage to an existing component.
 
-unit (Vitest), visual (Chromatic), a11y (axe), setup CI
+Step 01 has the full version with five a11y tests covering variants
+and a meta test. This step is the "minimum viable" one so you can
+start with a single test and grow from there.
 
-## Status
+## How to run it
 
-> Complete code in preparation.
+```bash
+cd en/examples/ch-16-testing/step-04
+npm install
+npm test
+```
 
-This folder is the destination of the `example_16_04` tag referenced in Chapter 16 of the Design System V.1.0 ebook. Runnable code will ship in a later release of this repo. For now the book link resolves here so readers know where the example will land.
+Expected output: one test passing in about a second.
+
+## The three effective lines
+
+```ts
+const { container } = render(<Button>Save</Button>);
+const results = await axe(container);
+expect(results).toHaveNoViolations();
+```
+
+That is all axe needs. The rest of the file (imports, describe, it)
+is boilerplate you already have if you already have unit tests.
+
+## What axe covers (and what it doesn't)
+
+**Does cover** (~45 per cent of automatable WCAG 2.1 AA):
+- Buttons without an accessible name
+- Inputs without a label
+- Images without alt text
+- Insufficient contrast (when styles are inline or CSS is embedded)
+- Misused ARIA (invalid attributes, impossible combinations)
+- Broken heading hierarchy
+- Duplicate IDs
+
+**Does not cover** (the other ~55 per cent, requires a human):
+- Focus management (where focus lands after closing a modal).
+- Logical tab order (axe sees the DOM, not the flow).
+- Screen reader announcements on state change.
+- Keyboard usability in complex widgets.
+- Contrast when colour comes from an image or gradient.
+
+The rule: axe as the first line, a 15-minute QA session with a
+screen reader per component as the second. Both in place and you are
+covered.
+
+## Scaling to a full DS
+
+A pattern that works for a DS with 50 components:
+
+```ts
+// a11y.helper.ts
+import { render } from '@testing-library/react';
+import { axe } from 'vitest-axe';
+import { ReactElement } from 'react';
+
+export async function expectNoA11yViolations(ui: ReactElement) {
+  const { container } = render(ui);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+}
+```
+
+Each component reduces to a one-liner test:
+
+```ts
+it('primary passes axe', async () => {
+  await expectNoA11yViolations(<Button variant="primary">Save</Button>);
+});
+```
+
+Equivalent helper already implemented in
+`ch-10-accessibility/step-01`.
 
 ## Back to the book
 
-- English edition: `ENG/02-tokens/` through `ENG/07-advanced/` depending on the chapter
-- This repo covers the 15 parts of the book that include code
+- Source text: `ENG/05-implementation/ch-16-testing.md`, section
+  "Accessibility testing with axe"
+- Related chapter: `ch-10-accessibility/step-01` (reusable helper)
+- Related chapter: `ch-16-testing/step-01` (full version)
 
 ## Licence
 
-MIT. See [LICENSE](../../../LICENSE) at the repo root.
+MIT. See [LICENSE](../../../../LICENSE) at the root of the repo.
