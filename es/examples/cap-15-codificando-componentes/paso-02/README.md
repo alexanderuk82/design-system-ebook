@@ -1,22 +1,64 @@
 # ejemplo_15_02
 
-**Capítulo 15: Codificando componentes** · paso 02
+**Capítulo 15: Codificando componentes** · paso 02 · switch de theme en React
 
-## Qué contendrá
+El componente raíz declara `data-theme` en un ancestor y un `useState` lo
+cambia. Zero context providers, zero re-renders descendientes. El navegador
+repinta solo.
 
-Button, Input, Select completos con variantes, theming, CSS variables
+## Archivo
 
-## Estado
+Vive en `paso-01/src/App.tsx`:
 
-> Código completo en preparación.
+```tsx
+import { useState } from 'react';
+import { Button } from './Button';
 
-Esta carpeta es el destino del tag `ejemplo_15_02` referenciado en el Capítulo 15 del libro Design System V.1.0. El código ejecutable se publicará en una release posterior del repo. Por ahora el link del libro resuelve aquí para que el lector sepa dónde aterrizará el ejemplo.
+export function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  return (
+    <div data-theme={theme}>
+      <Button
+        variant="ghost"
+        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      >
+        Tema: {theme}
+      </Button>
+      {/* resto de la app */}
+    </div>
+  );
+}
+```
+
+## Por qué importa
+
+Las alternativas (Context con objeto theme, prop drilling, CSS-in-JS con
+theme prop) re-renderizan cada descendiente al cambiar tema. Con CSS
+variables y `data-theme` el cambio es puramente cosmético a nivel del
+navegador. Abre DevTools, pestaña Performance, graba mientras cambias tema,
+y verás cero React renders entre el `setState` y el siguiente frame pintado.
+
+## Pares clave
+
+Este archivo trabaja junto con `paso-01/src/tokens.css` (paso 01 del
+capítulo), que define las variables por tema. Sin esas variables, el cambio
+de `data-theme` no tendría efecto.
+
+## Cómo correrlo
+
+```bash
+cd ../paso-01
+npm install
+npm run dev
+# click al boton "Tema: light" arriba a la derecha
+```
 
 ## Volver al libro
 
-- Edición español: `SPA/02-tokens/` a `SPA/07-avanzado/` según el capítulo
-- Este repo cubre las 15 partes del libro que incluyen código
+- Texto fuente: `SPA/05-implementacion/cap-15-codificando-componentes.md`, sección "Tokens como CSS variables, la capa base"
+- App completa: `paso-01/`
 
 ## Licencia
 
-MIT. Ver [LICENSE](../../../LICENSE) en la raíz del repo.
+MIT. Ver [LICENSE](../../../../LICENSE) en la raíz del repo.

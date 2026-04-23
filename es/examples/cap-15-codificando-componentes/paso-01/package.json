@@ -1,0 +1,24 @@
+{
+  "name": "ejemplo-15-01",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Capitulo 15: Button polimorfico con forwardRef, CSS Modules consumiendo tokens, switch de theme runtime sin re-renders.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}

@@ -1,22 +1,54 @@
 # example_15_03
 
-**Chapter 15: Coding components** · step 03
+**Chapter 15: Coding components** · step 03 · component file structure
 
-## What this will contain
+The "one folder per component" convention from Chapter 15: everything
+Button related lives together in its own folder.
 
-Button, Input, Select completos con variantes, theming, CSS variables
+## Structure
 
-## Status
+Inside `step-01/src/Button/`:
 
-> Complete code in preparation.
+```
+src/Button/
+├── Button.tsx              # TSX implementation
+├── Button.module.css       # scoped CSS Modules
+├── index.ts                # barrel export
+```
 
-This folder is the destination of the `example_15_03` tag referenced in Chapter 15 of the Design System V.1.0 ebook. Runnable code will ship in a later release of this repo. For now the book link resolves here so readers know where the example will land.
+In a full DS the same folder would also contain:
+
+```
+├── Button.stories.mdx      # chapter 13
+├── Button.test.tsx         # chapter 16
+└── Button.a11y.tsx         # specific axe tests
+```
+
+## Why it matters
+
+The old-school "one file per component" does not survive once the
+component has stories, tests, and a11y checks. Folder grouping scales.
+Inside the folder, names repeat (`Button.*`) so the file explorer sorts
+alphabetically by type, not by component.
+
+The `index.ts` lets consumers write `import { Button } from './Button'`
+(the folder) instead of `./Button/Button`. It hides the internal detail
+and leaves the door open to splitting the file later without touching
+consumers.
+
+## How to run it
+
+```bash
+cd ../step-01
+npm install
+npm run dev
+```
 
 ## Back to the book
 
-- English edition: `ENG/02-tokens/` through `ENG/07-advanced/` depending on the chapter
-- This repo covers the 15 parts of the book that include code
+- Source text: `ENG/05-implementation/ch-15-coding-components.md`, section "Internal structure of a DS component"
+- Full app: `step-01/`
 
 ## Licence
 
-MIT. See [LICENSE](../../../LICENSE) at the repo root.
+MIT. See [LICENSE](../../../../LICENSE) at the repo root.

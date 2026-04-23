@@ -1,22 +1,67 @@
 # example_15_04
 
-**Chapter 15: Coding components** · step 04
+**Chapter 15: Coding components** · step 04 · CSS Modules by data-attr
 
-## What this will contain
+The Button CSS is not triggered by conditional classnames from TypeScript.
+It is triggered by attribute selectors (`data-variant`, `data-size`).
 
-Button, Input, Select completos con variantes, theming, CSS variables
+## Excerpt
 
-## Status
+From `step-01/src/Button/Button.module.css`:
 
-> Complete code in preparation.
+```css
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  font: var(--font-body-md);
+  transition: background var(--motion-fast) var(--ease-out);
+}
 
-This folder is the destination of the `example_15_04` tag referenced in Chapter 15 of the Design System V.1.0 ebook. Runnable code will ship in a later release of this repo. For now the book link resolves here so readers know where the example will land.
+.button[data-variant='primary'] {
+  background: var(--color-action-bg);
+  color: var(--color-action-fg);
+}
+
+.button[data-size='sm'] { padding: var(--space-1) var(--space-3); }
+.button[data-size='md'] { padding: var(--space-2) var(--space-4); }
+.button[data-size='lg'] { padding: var(--space-3) var(--space-5); }
+```
+
+## Why it matters
+
+The TSX exposes `data-variant={variant}` and `data-size={size}`. The CSS
+responds with an attribute selector. Concrete wins:
+
+1. **Inspectable DOM.** Open DevTools Elements and you see
+   `data-variant="primary"` right on the button. Debugging a misapplied
+   variant is instant.
+2. **No conditional clsx.** No `clsx({ primary: variant === 'primary' })`.
+   The TSX stays clean: one line, `data-variant={variant}`.
+3. **Compatible with Storybook controls.** Changing `variant` from a
+   Storybook control mutates the attribute, CSS responds, no JSX class
+   re-renders.
+4. **Predictable cascade.** `[data-variant='primary']` selectors have
+   known specificity (0,1,1), higher than a class alone (0,1,0). An
+   external utility classname cannot win by accident.
+
+All CSS consumes tokens (`var(--color-action-bg)`, `var(--space-4)`). Zero
+hex codes. Zero magic numbers.
+
+## How to run it
+
+```bash
+cd ../step-01
+npm install
+npm run dev
+```
 
 ## Back to the book
 
-- English edition: `ENG/02-tokens/` through `ENG/07-advanced/` depending on the chapter
-- This repo covers the 15 parts of the book that include code
+- Source text: `ENG/05-implementation/ch-15-coding-components.md`, section "The Button in real code"
+- Full app: `step-01/`
 
 ## Licence
 
-MIT. See [LICENSE](../../../LICENSE) at the repo root.
+MIT. See [LICENSE](../../../../LICENSE) at the repo root.

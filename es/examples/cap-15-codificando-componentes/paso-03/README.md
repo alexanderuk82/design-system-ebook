@@ -1,22 +1,54 @@
 # ejemplo_15_03
 
-**Capítulo 15: Codificando componentes** · paso 03
+**Capítulo 15: Codificando componentes** · paso 03 · estructura del componente
 
-## Qué contendrá
+La convención de archivos por componente del Cap 15: todo lo relacionado con
+Button vive junto en una carpeta propia.
 
-Button, Input, Select completos con variantes, theming, CSS variables
+## Estructura
 
-## Estado
+Dentro de `paso-01/src/Button/`:
 
-> Código completo en preparación.
+```
+src/Button/
+├── Button.tsx              # implementacion TSX
+├── Button.module.css       # CSS Modules scoped
+├── index.ts                # barrel export
+```
 
-Esta carpeta es el destino del tag `ejemplo_15_03` referenciado en el Capítulo 15 del libro Design System V.1.0. El código ejecutable se publicará en una release posterior del repo. Por ahora el link del libro resuelve aquí para que el lector sepa dónde aterrizará el ejemplo.
+En un DS completo, la misma carpeta tambien contendria:
+
+```
+├── Button.stories.mdx      # cap 13
+├── Button.test.tsx         # cap 16
+└── Button.a11y.tsx         # tests axe especificos
+```
+
+## Por qué importa
+
+La convención "un archivo por componente" de la vieja escuela no aguanta
+cuando el componente tiene stories, tests y a11y checks. Agrupar por
+carpeta escala. Dentro de la carpeta, los nombres se repiten (`Button.*`)
+para que el navegador de archivos ordene alfabéticamente por tipo, no por
+componente.
+
+El `index.ts` permite `import { Button } from './Button'` (la carpeta) en
+vez de `./Button/Button`. Oculta el detalle interno y libera la opción de
+partir el archivo en el futuro sin tocar los consumers.
+
+## Cómo correrlo
+
+```bash
+cd ../paso-01
+npm install
+npm run dev
+```
 
 ## Volver al libro
 
-- Edición español: `SPA/02-tokens/` a `SPA/07-avanzado/` según el capítulo
-- Este repo cubre las 15 partes del libro que incluyen código
+- Texto fuente: `SPA/05-implementacion/cap-15-codificando-componentes.md`, sección "Estructura interna de un componente del DS"
+- App completa: `paso-01/`
 
 ## Licencia
 
-MIT. Ver [LICENSE](../../../LICENSE) en la raíz del repo.
+MIT. Ver [LICENSE](../../../../LICENSE) en la raíz del repo.

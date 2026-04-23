@@ -1,0 +1,107 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  font: var(--font-body-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--motion-fast) var(--ease-out),
+              transform var(--motion-fast) var(--ease-out);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.button:active:not(:disabled, [aria-disabled='true']) {
+  transform: translateY(1px);
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.button[data-size='sm'] {
+  padding: var(--space-1) var(--space-3);
+  font: var(--font-body-sm);
+}
+
+.button[data-size='md'] {
+  padding: var(--space-2) var(--space-4);
+}
+
+.button[data-size='lg'] {
+  padding: var(--space-3) var(--space-5);
+  font: var(--font-body-lg);
+}
+
+.button[data-variant='primary'] {
+  background: var(--color-action-bg);
+  color: var(--color-action-fg);
+}
+
+.button[data-variant='primary']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-action-bg-hover);
+}
+
+.button[data-variant='secondary'] {
+  background: var(--color-secondary-bg);
+  color: var(--color-secondary-fg);
+}
+
+.button[data-variant='secondary']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-secondary-bg-hover);
+}
+
+.button[data-variant='ghost'] {
+  background: transparent;
+  color: var(--color-ghost-fg);
+}
+
+.button[data-variant='ghost']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-ghost-bg-hover);
+}
+
+.button[data-variant='danger'] {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-fg);
+}
+
+.button[data-variant='danger']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-danger-bg-hover);
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: ds-spin 700ms linear infinite;
+}
+
+.icon {
+  display: inline-flex;
+}
+
+.label {
+  display: inline-block;
+}
+
+@keyframes ds-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .spinner {
+    transition: none;
+    animation: none;
+  }
+}
