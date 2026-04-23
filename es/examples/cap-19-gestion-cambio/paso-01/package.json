@@ -1,0 +1,15 @@
+{
+  "name": "ejemplo-19-01",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Capitulo 19: demo minima de changesets con un fake @ds/react package.",
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version",
+    "publish": "changeset publish"
+  },
+  "workspaces": ["packages/*"],
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0"
+  }
+}
