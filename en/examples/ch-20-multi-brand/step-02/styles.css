@@ -1,0 +1,124 @@
+/* Primitives */
+:root {
+  --blue-500: #0052CC;
+  --green-500: #00875A;
+  --red-500: #DE350B;
+
+  --grey-50: #F7F8F9;
+  --grey-900: #091E42;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Merriweather', Georgia, serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+}
+
+/* Semantic modes per brand */
+[data-brand='fintech'] {
+  --color-brand: var(--blue-500);
+  --radius-control: var(--radius-sm);
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-sans);
+}
+[data-brand='health'] {
+  --color-brand: var(--green-500);
+  --radius-control: var(--radius-lg);
+  --font-heading: var(--font-serif);
+  --font-body: var(--font-sans);
+}
+[data-brand='retail'] {
+  --color-brand: var(--red-500);
+  --radius-control: var(--radius-full);
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-sans);
+}
+
+/* Button component, identical across brands */
+.button {
+  background: var(--color-brand);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius-control);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.button:hover { filter: brightness(0.92); }
+.button:focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+
+/* Demo layout */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--grey-50);
+  color: var(--grey-900);
+  font-family: var(--font-sans);
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.stage {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 520px;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.08), 0 10px 30px rgba(9, 30, 66, 0.08);
+}
+
+.stage h1 {
+  margin: 0 0 8px;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.stage p {
+  margin: 0 0 24px;
+  color: rgba(9, 30, 66, 0.7);
+  line-height: 1.55;
+}
+
+.switcher {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.switcher button {
+  appearance: none;
+  border: 1px solid rgba(9, 30, 66, 0.12);
+  background: #fff;
+  color: var(--grey-900);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.switcher button[aria-pressed='true'] {
+  background: var(--grey-900);
+  color: #fff;
+  border-color: var(--grey-900);
+}
+
+.meta {
+  font-size: 12px;
+  color: rgba(9, 30, 66, 0.55);
+  margin-top: 24px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}

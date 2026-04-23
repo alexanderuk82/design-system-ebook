@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ejemplo_20_01 · Tokens multi-marca</title>
+    <link rel="stylesheet" href="tokens.css" />
+  </head>
+  <body>
+    <div class="grid">
+      <section data-brand="fintech">
+        <div class="brand-label">fintech</div>
+        <div class="card">
+          <h3>Transfer bank funds</h3>
+          <p>
+            Schedule, review and confirm multi-leg transfers across accounts.
+            Consume tokens via <code>data-brand</code>, cero overrides por
+            marca.
+          </p>
+          <button class="button">Continue</button>
+        </div>
+      </section>
+
+      <section data-brand="health">
+        <div class="brand-label">health</div>
+        <div class="card">
+          <h3>Book a consultation</h3>
+          <p>
+            Pick a day, confirm symptoms, and attach relevant documents before
+            the call. Same HTML, distinto brand mode.
+          </p>
+          <button class="button">Continue</button>
+        </div>
+      </section>
+
+      <section data-brand="retail">
+        <div class="brand-label">retail</div>
+        <div class="card">
+          <h3>Place your order</h3>
+          <p>
+            Review items, pick a delivery slot, and confirm. El Button hereda
+            radius full porque la brand lo pide.
+          </p>
+          <button class="button">Continue</button>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

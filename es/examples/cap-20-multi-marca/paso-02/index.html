@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ejemplo_20_02 · Switcher runtime de marca</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useState } = React;
+      const { createRoot } = ReactDOM;
+
+      const BRANDS = ['fintech', 'health', 'retail'];
+
+      function Button({ children, onClick }) {
+        return (
+          <button className="button" onClick={onClick} type="button">
+            {children}
+          </button>
+        );
+      }
+
+      function App() {
+        const [brand, setBrand] = useState('fintech');
+
+        return (
+          <div className="stage" data-brand={brand}>
+            <h1>Cambia de marca sin tocar el componente</h1>
+            <p>
+              El mismo Button, el mismo HTML, el mismo bundle. Cambiamos el
+              atributo <code>data-brand</code> en el ancestro y toda la
+              cascada de tokens se actualiza. Cero re-renders forzados por
+              cambio de tema.
+            </p>
+
+            <div className="switcher" role="group" aria-label="Cambiar marca">
+              {BRANDS.map((b) => (
+                <button
+                  key={b}
+                  aria-pressed={brand === b}
+                  onClick={() => setBrand(b)}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
+
+            <Button onClick={() => alert(`Click con marca ${brand}`)}>
+              Continuar con {brand}
+            </Button>
+
+            <div className="meta">data-brand="{brand}"</div>
+          </div>
+        );
+      }
+
+      createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>
