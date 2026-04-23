@@ -40,10 +40,10 @@ en/examples/ch-09-building-components/step-04/ →  referenced as example_09_04 
 | B | Chapters 1, 2, 4, 5, 6, 7 (tokens) | ✅ done |
 | C | Chapters 9, 10, 12 (components) | ✅ done |
 | D | Chapters 13, 14, 15, 16 (implementation) | ✅ done |
-| E | Chapters 19, 20 (advanced) | ⏳ pending |
+| E | Chapters 19, 20 (advanced) | ✅ done |
 | F | CI, Storybook deploy, package publishing | ⏳ pending |
 
-**Shipped so far**: 39 examples × 2 languages = 78 folders. Phase D adds Storybook 8, a pnpm + Turborepo monorepo, a polymorphic forwardRef Button with CSS Modules tokenised by data attributes, and a full testing pipeline (Vitest + Testing Library + vitest-axe, Storybook interaction play, Chromatic CI workflow, test-runner with axe-playwright). Follow releases on [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) to see when each phase lands.
+**Shipped**: all 43 examples × 2 languages = 86 folders. Every `example_NN_NN` tag in the book resolves to code you can run. Phase E closes the loop with a runnable `@changesets/cli` demo, a real jscodeshift codemod for a prop rename, and two multi-brand HTML examples (static three-brand grid + runtime brand switcher). Follow releases on [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases).
 
 ### How the examples are organised
 
@@ -123,10 +123,10 @@ es/examples/cap-09-construyendo-componentes/paso-04/ →  referenciado como ejem
 | B | Capítulos 1, 2, 4, 5, 6, 7 (tokens) | ✅ listo |
 | C | Capítulos 9, 10, 12 (componentes) | ✅ listo |
 | D | Capítulos 13, 14, 15, 16 (implementación) | ✅ listo |
-| E | Capítulos 19, 20 (avanzado) | ⏳ pendiente |
+| E | Capítulos 19, 20 (avanzado) | ✅ listo |
 | F | CI, deploy Storybook, publicar packages | ⏳ pendiente |
 
-**Enviado hasta ahora**: 39 ejemplos × 2 idiomas = 78 carpetas. La Fase D añade Storybook 8, un monorepo pnpm + Turborepo, un Button polimórfico con forwardRef y CSS Modules tokenizados por data attributes, y un pipeline de testing completo (Vitest + Testing Library + vitest-axe, interaction play de Storybook, workflow Chromatic, test-runner con axe-playwright). Sigue las releases en [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases) para ver cuándo aterriza cada fase.
+**Enviado**: los 43 ejemplos × 2 idiomas = 86 carpetas. Cada tag `ejemplo_NN_NN` del libro resuelve a código ejecutable. La Fase E cierra el círculo con una demo runnable de `@changesets/cli`, un codemod jscodeshift real para rename de prop, y dos ejemplos HTML multi-marca (grid estático de tres marcas + switcher runtime). Sigue las releases en [GitHub](https://github.com/alexanderuk82/design-system-ebook/releases).
 
 ### Cómo están organizados los ejemplos
 
