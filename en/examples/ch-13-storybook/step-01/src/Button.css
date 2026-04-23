@@ -1,0 +1,140 @@
+:root,
+[data-theme="light"] {
+  --ds-bg: #ffffff;
+  --ds-fg: #0f172a;
+  --ds-primary-bg: #2563eb;
+  --ds-primary-fg: #ffffff;
+  --ds-primary-bg-hover: #1d4ed8;
+  --ds-secondary-bg: #e2e8f0;
+  --ds-secondary-fg: #0f172a;
+  --ds-secondary-bg-hover: #cbd5e1;
+  --ds-ghost-fg: #1e40af;
+  --ds-ghost-bg-hover: #eff6ff;
+  --ds-danger-bg: #b91c1c;
+  --ds-danger-fg: #ffffff;
+  --ds-danger-bg-hover: #991b1b;
+  --ds-focus-ring: #2563eb;
+  --ds-disabled-opacity: 0.5;
+}
+
+[data-theme="dark"] {
+  --ds-bg: #0f172a;
+  --ds-fg: #f1f5f9;
+  --ds-primary-bg: #3b82f6;
+  --ds-primary-fg: #0f172a;
+  --ds-primary-bg-hover: #60a5fa;
+  --ds-secondary-bg: #1e293b;
+  --ds-secondary-fg: #f1f5f9;
+  --ds-secondary-bg-hover: #334155;
+  --ds-ghost-fg: #93c5fd;
+  --ds-ghost-bg-hover: #1e293b;
+  --ds-danger-bg: #dc2626;
+  --ds-danger-fg: #ffffff;
+  --ds-danger-bg-hover: #ef4444;
+  --ds-focus-ring: #60a5fa;
+}
+
+body {
+  background: var(--ds-bg);
+  color: var(--ds-fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 140ms ease, transform 140ms ease;
+}
+
+.ds-button:focus-visible {
+  outline: 3px solid var(--ds-focus-ring);
+  outline-offset: 2px;
+}
+
+.ds-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.ds-button:disabled {
+  opacity: var(--ds-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.ds-button[data-size="sm"] {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.ds-button[data-size="md"] {
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+}
+
+.ds-button[data-size="lg"] {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+}
+
+.ds-button[data-variant="primary"] {
+  background: var(--ds-primary-bg);
+  color: var(--ds-primary-fg);
+}
+
+.ds-button[data-variant="primary"]:hover:not(:disabled) {
+  background: var(--ds-primary-bg-hover);
+}
+
+.ds-button[data-variant="secondary"] {
+  background: var(--ds-secondary-bg);
+  color: var(--ds-secondary-fg);
+}
+
+.ds-button[data-variant="secondary"]:hover:not(:disabled) {
+  background: var(--ds-secondary-bg-hover);
+}
+
+.ds-button[data-variant="ghost"] {
+  background: transparent;
+  color: var(--ds-ghost-fg);
+}
+
+.ds-button[data-variant="ghost"]:hover:not(:disabled) {
+  background: var(--ds-ghost-bg-hover);
+}
+
+.ds-button[data-variant="danger"] {
+  background: var(--ds-danger-bg);
+  color: var(--ds-danger-fg);
+}
+
+.ds-button[data-variant="danger"]:hover:not(:disabled) {
+  background: var(--ds-danger-bg-hover);
+}
+
+.ds-button__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: ds-spin 700ms linear infinite;
+}
+
+@keyframes ds-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-button,
+  .ds-button__spinner {
+    transition: none;
+    animation: none;
+  }
+}

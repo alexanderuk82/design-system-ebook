@@ -1,0 +1,44 @@
+import { Meta, Canvas, Controls, Primary, Stories, Title, Description, Subtitle } from "@storybook/blocks";
+import * as ButtonStories from "./Button.stories";
+
+<Meta of={ButtonStories} />
+
+<Title>Button</Title>
+
+<Subtitle>Primary interactive element for page-level actions.</Subtitle>
+
+Four semantic variants, three sizes, full loading and disabled states. This MDX
+file lives next to the component. If the Button API changes, the docs break at
+build time and force an update. Documentation cannot fall behind because the
+compiler will not let it.
+
+## Live render
+
+<Primary />
+
+## Interactive controls
+
+Change props from the panel below and watch the component react. This is the
+zone product designers get the most value from.
+
+<Controls />
+
+## When to use each variant
+
+- **primary**, the main screen action. Only one per context.
+- **secondary**, important but non primary actions. Cancel, back, and similar.
+- **ghost**, support actions or secondary navigation.
+- **danger**, irreversible actions with serious consequences.
+
+## Accessibility
+
+The Accessibility panel runs axe-core against every story and reports
+violations, passes, and inconclusive results. If you swap the color tokens to
+low contrast values, the affected story will light up here.
+
+The Button respects `prefers-reduced-motion`. When the user has it on, the
+loading spinner renders static instead of rotating.
+
+## All stories
+
+<Stories />
