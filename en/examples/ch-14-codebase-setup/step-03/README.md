@@ -1,22 +1,54 @@
 # example_14_03
 
-**Chapter 14: Codebase setup** · step 03
+**Chapter 14: Codebase setup** · step 03 · `packages/react/tsconfig.json`
 
-## What this will contain
+The tsconfig of a package that inherits the base. Six lines instead of fifty.
 
-monorepo pnpm + tsconfig + ESLint + Vite, cada paso añade una capa
+## File
 
-## Status
+Lives at `step-01/packages/react/tsconfig.json` inside the real monorepo:
 
-> Complete code in preparation.
+```json
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"]
+}
+```
 
-This folder is the destination of the `example_14_03` tag referenced in Chapter 14 of the Design System V.1.0 ebook. Runnable code will ship in a later release of this repo. For now the book link resolves here so readers know where the example will land.
+## Why it matters
+
+The package only declares what is specific to its context: where sources
+live (`rootDir`), where compiled output goes (`outDir`), and which files it
+covers (`include`). Everything else (target, strict, jsx, moduleResolution)
+is inherited from the base.
+
+When the monorepo grows to ten packages, each one keeps this minimal
+shape. If you add a ninth package tomorrow, copying this file literally
+and adjusting the `extends` path is all the TypeScript setup you need.
+
+## The `@ds/tokens` package uses the same pattern
+
+See `step-01/packages/tokens/tsconfig.json`. Identical structure, different
+package.
+
+## Running the monorepo
+
+```bash
+cd ../step-01
+pnpm install
+pnpm typecheck
+```
 
 ## Back to the book
 
-- English edition: `ENG/02-tokens/` through `ENG/07-advanced/` depending on the chapter
-- This repo covers the 15 parts of the book that include code
+- Source text: `ENG/05-implementation/ch-14-codebase-setup.md`, section "Shared tsconfig"
+- Full monorepo: `step-01/`
+- Base config being extended: `step-02`
 
 ## Licence
 
-MIT. See [LICENSE](../../../LICENSE) at the repo root.
+MIT. See [LICENSE](../../../../LICENSE) at the repo root.

@@ -1,0 +1,27 @@
+{
+  "name": "@ds/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./tokens.css": "./src/tokens.css"
+  },
+  "files": ["dist", "src/tokens.css"],
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint src --ext ts,tsx",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

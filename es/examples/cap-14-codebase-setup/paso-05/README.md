@@ -1,22 +1,53 @@
 # ejemplo_14_05
 
-**Capítulo 14: Codebase setup** · paso 05
+**Capítulo 14: Codebase setup** · paso 05 · `.prettierrc`
 
-## Qué contendrá
+Configuración de Prettier compartida. Cinco líneas que evitan debates eternos
+de estilo en code review.
 
-monorepo pnpm + tsconfig + ESLint + Vite, cada paso añade una capa
+## Archivo
 
-## Estado
+Vive en `paso-01/.prettierrc` dentro del monorepo real:
 
-> Código completo en preparación.
+```json
+{
+  "singleQuote": true,
+  "semi": true,
+  "printWidth": 80,
+  "trailingComma": "es5"
+}
+```
 
-Esta carpeta es el destino del tag `ejemplo_14_05` referenciado en el Capítulo 14 del libro Design System V.1.0. El código ejecutable se publicará en una release posterior del repo. Por ahora el link del libro resuelve aquí para que el lector sepa dónde aterrizará el ejemplo.
+## Por qué importa
+
+Prettier resuelve formato a nivel mecánico, no a nivel humano. Cero
+discusiones en PR sobre comillas o ancho de línea. El formateador elige por
+ti y todo el equipo respeta lo mismo.
+
+`printWidth: 80` es deliberado. Coincide con lo que Kindle reflowable tolera
+bien para bloques de código (ver Cap 2 sobre ebook reflow). Si algún snippet
+del DS termina publicado en docs o en este libro, no rompe el wrapping.
+
+`trailingComma: "es5"` añade comas finales en arrays y objetos pero no en
+firmas de función (donde no son legales en `es5`). Reduce ruido en diffs:
+añadir un elemento al final de un array no toca la línea anterior.
+
+## Cómo se aplica
+
+```bash
+cd ../paso-01
+pnpm format     # corre prettier --write sobre todo el repo
+```
+
+Idealmente con un pre-commit hook (Husky + lint-staged) que solo formatee
+los archivos staged. Eso queda fuera del scope del Cap 14, pero es el
+siguiente paso natural.
 
 ## Volver al libro
 
-- Edición español: `SPA/02-tokens/` a `SPA/07-avanzado/` según el capítulo
-- Este repo cubre las 15 partes del libro que incluyen código
+- Texto fuente: `SPA/05-implementacion/cap-14-codebase-setup.md`, sección "ESLint y Prettier"
+- Monorepo completo: `paso-01/`
 
 ## Licencia
 
-MIT. Ver [LICENSE](../../../LICENSE) en la raíz del repo.
+MIT. Ver [LICENSE](../../../../LICENSE) en la raíz del repo.

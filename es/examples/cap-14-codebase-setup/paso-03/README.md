@@ -1,22 +1,55 @@
 # ejemplo_14_03
 
-**Capítulo 14: Codebase setup** · paso 03
+**Capítulo 14: Codebase setup** · paso 03 · `packages/react/tsconfig.json`
 
-## Qué contendrá
+El tsconfig de un package que hereda la base. Seis líneas en lugar de cincuenta.
 
-monorepo pnpm + tsconfig + ESLint + Vite, cada paso añade una capa
+## Archivo
 
-## Estado
+Vive en `paso-01/packages/react/tsconfig.json` dentro del monorepo real:
 
-> Código completo en preparación.
+```json
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"]
+}
+```
 
-Esta carpeta es el destino del tag `ejemplo_14_03` referenciado en el Capítulo 14 del libro Design System V.1.0. El código ejecutable se publicará en una release posterior del repo. Por ahora el link del libro resuelve aquí para que el lector sepa dónde aterrizará el ejemplo.
+## Por qué importa
+
+El package solo declara lo específico de su contexto: dónde están las fuentes
+(`rootDir`), dónde van los compilados (`outDir`), qué archivos cubre
+(`include`). Todo lo demás (target, strict, jsx, moduleResolution) lo
+hereda de la base.
+
+Cuando el monorepo crece a diez packages, cada uno mantiene este shape
+mínimo. Si añades un noveno package nuevo mañana, copiar este archivo
+literalmente y ajustar el path al `extends` es todo el setup TypeScript
+que necesitas.
+
+## El package `@ds/tokens` usa el mismo patrón
+
+Ver `paso-01/packages/tokens/tsconfig.json`. Idéntica estructura, distinto
+package.
+
+## Cómo correr el monorepo
+
+```bash
+cd ../paso-01
+pnpm install
+pnpm typecheck
+```
 
 ## Volver al libro
 
-- Edición español: `SPA/02-tokens/` a `SPA/07-avanzado/` según el capítulo
-- Este repo cubre las 15 partes del libro que incluyen código
+- Texto fuente: `SPA/05-implementacion/cap-14-codebase-setup.md`, sección "tsconfig compartido"
+- Monorepo completo: `paso-01/`
+- Config base que extiende: `paso-02`
 
 ## Licencia
 
-MIT. Ver [LICENSE](../../../LICENSE) en la raíz del repo.
+MIT. Ver [LICENSE](../../../../LICENSE) en la raíz del repo.

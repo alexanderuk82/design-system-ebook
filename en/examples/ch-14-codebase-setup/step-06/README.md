@@ -1,22 +1,64 @@
 # example_14_06
 
-**Chapter 14: Codebase setup** · step 06
+**Chapter 14: Codebase setup** · step 06 · `packages/react/tsup.config.ts`
 
-## What this will contain
+tsup config for the `@ds/react` package. Ten lines producing ESM, CJS and
+`.d.ts` bundles in parallel.
 
-monorepo pnpm + tsconfig + ESLint + Vite, cada paso añade una capa
+## File
 
-## Status
+Lives at `step-01/packages/react/tsup.config.ts` inside the real monorepo:
 
-> Complete code in preparation.
+```ts
+import { defineConfig } from 'tsup';
 
-This folder is the destination of the `example_14_06` tag referenced in Chapter 14 of the Design System V.1.0 ebook. Runnable code will ship in a later release of this repo. For now the book link resolves here so readers know where the example will land.
+export default defineConfig({
+  entry: ['src/index.ts'],
+  format: ['esm', 'cjs'],
+  dts: true,
+  clean: true,
+  sourcemap: true,
+  external: ['react', 'react-dom'],
+});
+```
+
+## Why it matters
+
+tsup wraps esbuild with sensible library defaults. Zero custom config. The
+output covers the three consumption scenarios:
+
+- **ESM** (`dist/index.js`), for modern apps with tree shaking bundlers.
+- **CJS** (`dist/index.cjs`), for classic Node and legacy tooling.
+- **DTS** (`dist/index.d.ts`), so TypeScript infers types from the package
+  when consumed.
+
+`external: ['react', 'react-dom']` is the critical line. Without it your
+bundle includes React and the consuming app ends up with two copies (its
+own plus yours). That breaks hooks, doubles the bundle size, and produces
+bugs that are impossible to debug. Marking React as external is non
+negotiable in any React DS package.
+
+`clean: true` wipes `dist/` before each build. Prevents old files from
+surviving after you rename exports.
+
+## The `@ds/tokens` package has a similar tsup
+
+See `step-01/packages/tokens/tsup.config.ts`. Identical pattern without
+`external` because tokens does not depend on React.
+
+## How it runs
+
+```bash
+cd ../step-01
+pnpm build      # turbo orchestrates tokens first, then react
+```
 
 ## Back to the book
 
-- English edition: `ENG/02-tokens/` through `ENG/07-advanced/` depending on the chapter
-- This repo covers the 15 parts of the book that include code
+- Source text: `ENG/05-implementation/ch-14-codebase-setup.md`, section "Build tooling"
+- Full monorepo: `step-01/`
+- Pipeline that orchestrates: `step-07` (turbo.json)
 
 ## Licence
 
-MIT. See [LICENSE](../../../LICENSE) at the repo root.
+MIT. See [LICENSE](../../../../LICENSE) at the repo root.

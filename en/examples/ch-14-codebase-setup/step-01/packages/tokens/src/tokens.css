@@ -1,0 +1,16 @@
+:root {
+  --ds-color-primary: #2563eb;
+  --ds-color-primary-fg: #ffffff;
+  --ds-color-secondary: #e2e8f0;
+  --ds-color-secondary-fg: #0f172a;
+  --ds-color-danger: #b91c1c;
+  --ds-color-danger-fg: #ffffff;
+  --ds-color-focus-ring: #2563eb;
+  --ds-radius-sm: 0.25rem;
+  --ds-radius-md: 0.5rem;
+  --ds-radius-lg: 0.75rem;
+  --ds-space-xs: 0.25rem;
+  --ds-space-sm: 0.5rem;
+  --ds-space-md: 1rem;
+  --ds-space-lg: 1.5rem;
+}
